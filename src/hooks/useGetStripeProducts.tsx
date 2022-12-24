@@ -1,15 +1,10 @@
-/* eslint-disable no-unused-expressions */
 import { stripe } from '../services/stripe'
 
-export const useGetStripeProducts = async (brand: string, page: number) => {
-  const productResponse = await stripe.products.search({
-    query: `metadata['brand']:'${brand}'`,
+export async function useGetStripeProducts(metadata: string, key: string) {
+  const response = await stripe.products.search({
+    query: `metadata['${metadata}']:'${key}'`,
     expand: ['data.default_price'],
-    limit: 5,
-    page: String(page),
   })
 
-  console.log(productResponse)
-
-  return productResponse
+  return response.data
 }

@@ -1,38 +1,42 @@
-import Head from "next/head";
-import Link from "next/link";
-import { CaretRight, CircleNotch } from "phosphor-react";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Controller, useForm } from "react-hook-form";
-import HeaderInternalPageNavigation from "../../../../components/HeaderInternalPageNavigation";
-import Checkbox from "../../../../primitives/Checkbox";
+import Head from 'next/head'
+import Link from 'next/link'
+import { CaretRight, CircleNotch } from 'phosphor-react'
+import { z } from 'zod'
+import * as React from 'react'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Controller, useForm } from 'react-hook-form'
+import HeaderInternalPageNavigation from '../../../../components/HeaderInternalPageNavigation'
+import Checkbox from '../../../../primitives/Checkbox'
 import {
   ButtonCreateNewAddress,
   Container,
   FormContainer,
   Input,
-} from "../../../../styles/pages/new-address";
-import useAddressContext from "../../../../contexts/AddressContext";
+} from '../../../../styles/pages/new-address'
+import useAddressContext from '../../../../contexts/AddressContext'
+import { useEffect } from 'react'
 
 const newAddressValidationSchema = z.object({
-  zip: z.number(),
+  zip: z.string().regex(new RegExp('(^\\d{5})\\-?(\\d{3}$).*'), 'CEP Inválido'),
   city: z.string(),
   state: z.string(),
-  street: z.string().min(1, "Cidade é um campo obrigatório"),
-  number: z.number().min(1, "Número é um campo obrigatório"),
-  district: z.string().min(1, "Bairro é um campo obrigatório"),
+  street: z.string().min(1, '* indica campo obrigatório'),
+  number: z.string().min(1, '* indica campo obrigatório').max(8, 'Máximo permitido: 8'),
+  district: z.string().min(1, '* indica campo obrigatório'),
   complement: z.string().optional(),
   isCurrentAddress: z.boolean().nullable(),
-});
+})
 
-type NewAddressForm = z.infer<typeof newAddressValidationSchema>;
+type NewAddressForm = z.infer<typeof newAddressValidationSchema>
 
 export default function NewAddress() {
-  const { createNewAddress } = useAddressContext();
+  const { createNewAddress } = useAddressContext()
   const {
     register,
     handleSubmit,
+    watch,
     control,
+    setValue,
     reset,
     formState: { isSubmitting, errors },
   } = useForm<NewAddressForm>({
@@ -40,14 +44,27 @@ export default function NewAddress() {
     defaultValues: {
       isCurrentAddress: false,
     },
-  });
+  })
 
   async function handleCreateNewAddress(data: NewAddressForm) {
-    await new Promise((resolve) => setTimeout(resolve, 800));
+    await new Promise((resolve) => setTimeout(resolve, 800))
 
-    createNewAddress(data);
-    reset();
+    createNewAddress(data)
+    reset()
   }
+
+  function replaceInputValue(value: string | undefined) {
+    if (!value) return
+    return value.replace(/\D/g, '')
+  }
+
+  const zip = watch('zip')
+  const number = watch('number')
+
+  useEffect(() => {
+    setValue('zip', replaceInputValue(zip))
+    setValue('number', replaceInputValue(number))
+  }, [zip, number])
 
   return (
     <>
@@ -77,10 +94,9 @@ export default function NewAddress() {
               error={!!errors.zip?.message}
               id="zip"
               type="text"
+              maxLength={8}
               placeholder="88915-000"
-              {...register("zip", {
-                valueAsNumber: true,
-              })}
+              {...register('zip')}
             />
             <span>{errors.zip?.message}</span>
           </div>
@@ -92,7 +108,7 @@ export default function NewAddress() {
               placeholder="Rua 04 de novembro"
               id="street"
               type="text"
-              {...register("street")}
+              {...register('street')}
             />
             <span>{errors.street?.message}</span>
           </div>
@@ -104,9 +120,8 @@ export default function NewAddress() {
               placeholder="192 ou S/N"
               id="number"
               type="text"
-              {...register("number", {
-                valueAsNumber: true,
-              })}
+              maxLength={8}
+              {...register('number')}
             />
             <span>{errors.number?.message}</span>
           </div>
@@ -118,7 +133,7 @@ export default function NewAddress() {
               placeholder="Apartamento, casa, andar, etc..."
               id="complement"
               type="text"
-              {...register("complement")}
+              {...register('complement')}
             />
             <span>{errors.complement?.message}</span>
           </div>
@@ -130,7 +145,7 @@ export default function NewAddress() {
               placeholder="São Fagundes"
               id="district"
               type="text"
-              {...register("district")}
+              {...register('district')}
             />
             <span>{errors.district?.message}</span>
           </div>
@@ -142,7 +157,7 @@ export default function NewAddress() {
               placeholder="Florianópolis"
               id="city'"
               type="text"
-              {...register("city")}
+              {...register('city')}
             />
             <span>{errors.city?.message}</span>
           </div>
@@ -154,7 +169,7 @@ export default function NewAddress() {
               placeholder="SC"
               id="state"
               type="text"
-              {...register("state")}
+              {...register('state')}
             />
             <span>{errors.state?.message}</span>
           </div>
@@ -167,7 +182,7 @@ export default function NewAddress() {
                 <Checkbox onCheckedChange={field.onChange} id="main-address">
                   Salvar como endereço padrão
                 </Checkbox>
-              );
+              )
             }}
           />
 
@@ -184,5 +199,5 @@ export default function NewAddress() {
         </FormContainer>
       </Container>
     </>
-  );
+  )
 }
