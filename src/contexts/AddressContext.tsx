@@ -3,28 +3,35 @@ import { v4 as uuid } from 'uuid'
 import { Address } from '../@types/address'
 
 type AddressContextType = {
-  address: Address[]
+  adresses: Address[]
   createNewAddress: (data: Address) => void
 }
 
 type AddressForm = {
-  zip: number
+  zip: string
   city: string
   state: string
   street: string
-  number: number
+  number: string
   district: string
   complement: string
+  addressName: string
   isCurrentAddress: boolean
 }
 
-export const AddressContext = React.createContext<AddressContextType | null>(null)
+export const AddressContext = React.createContext<AddressContextType | null>(
+  null,
+)
 
-export function AddressContextProvider({ children }: { children: React.ReactNode }) {
-  const [address, setAddress] = React.useState<Address[]>([])
+export function AddressContextProvider({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  const [adresses, setAddresses] = React.useState<Address[]>([])
 
   function createNewAddress(data: AddressForm) {
-    setAddress((state) => [
+    setAddresses((state) => [
       {
         id: uuid(),
         zip: data.zip,
@@ -34,6 +41,7 @@ export function AddressContextProvider({ children }: { children: React.ReactNode
         street: data.street,
         district: data.district,
         complement: data.complement,
+        addressName: data.addressName,
         isCurrentAddress: data.isCurrentAddress,
       },
       ...state,
@@ -41,7 +49,7 @@ export function AddressContextProvider({ children }: { children: React.ReactNode
   }
 
   return (
-    <AddressContext.Provider value={{ createNewAddress, address }}>
+    <AddressContext.Provider value={{ createNewAddress, adresses }}>
       {children}
     </AddressContext.Provider>
   )

@@ -1,9 +1,12 @@
 export type Address = {
-  zip?: number
+  zip?: string
   street?: string
-  number?: number
+  number?: string
   complement?: string
   district?: string
   city?: string
+  id?: string
+  state?: string
+  addressName?: string
   state?: string
 }

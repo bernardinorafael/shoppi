@@ -22,8 +22,8 @@ export const Container = styled.div`
   }
 
   span {
-    color: ${({ theme }) => theme.COLORS.red[200]};
+    color: ${({ theme }) => theme.COLORS.amber[100]};
     font-size: 1rem;
-		font-weight: 500;
+    font-weight: 600;
   }
 `

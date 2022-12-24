@@ -6,7 +6,13 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
-import { CaretDown, CircleNotch, Ruler, Truck } from 'phosphor-react'
+import {
+  CaretDown,
+  CaretRight,
+  CircleNotch,
+  Ruler,
+  Truck,
+} from 'phosphor-react'
 import * as React from 'react'
 import Stripe from 'stripe'
 import DialogImageProduct from '../../components/DialogImageProduct'
@@ -30,6 +36,7 @@ import {
   SizeContainer,
 } from '../../styles/pages/product/product'
 import { SelectTrigger } from '../../styles/pages/product/select-address'
+import HeaderInternalPageNavigation from '../../components/HeaderInternalPageNavigation'
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
@@ -80,7 +87,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export const getStaticProps: GetStaticProps<any, { id: string }> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
+  params,
+}) => {
   const productId = params.id
 
   const product = await stripe.products.retrieve(productId, {
@@ -154,7 +163,12 @@ export default function Product({ product }: ProductProps) {
       </Head>
 
       <NavigationContainer>
-        <HeaderNavProduct brand={product.brand} name={product.name} />
+        <HeaderInternalPageNavigation current={product.name}>
+          <Link href="/">Início</Link>
+          <CaretRight />
+          <Link href="/">{product.brand}</Link>
+          <CaretRight />
+        </HeaderInternalPageNavigation>
 
         <ShippingContainer>
           <Truck weight="duotone" size={42} />
@@ -185,7 +199,10 @@ export default function Product({ product }: ProductProps) {
           {product.promotion === 'true' ? (
             <OfferContainer>
               <span>
-                R$ {(product.price + product.price / 10).toFixed(2).replace('.', ',')}
+                R${' '}
+                {(product.price + product.price / 10)
+                  .toFixed(2)
+                  .replace('.', ',')}
               </span>
               <span>OFERTA ESPECIAL</span>
             </OfferContainer>
@@ -196,8 +213,10 @@ export default function Product({ product }: ProductProps) {
 
             <span>
               ou 10x de{' '}
-              <strong>R$ {(product.price / 10).toFixed(2).replace('.', ',')}</strong> sem
-              juros
+              <strong>
+                R$ {(product.price / 10).toFixed(2).replace('.', ',')}
+              </strong>{' '}
+              sem juros
             </span>
           </PriceContainer>
 
@@ -254,7 +273,10 @@ export default function Product({ product }: ProductProps) {
 
           <ButtonCartContainer>
             {isCreatingCheckout ? (
-              <button disabled={isCreatingCheckout} onClick={handleBuyUniqueProduct}>
+              <button
+                disabled={isCreatingCheckout}
+                onClick={handleBuyUniqueProduct}
+              >
                 <CircleNotch size={20} weight="bold" />
                 Compra rápida
               </button>

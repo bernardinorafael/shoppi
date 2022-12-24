@@ -1,7 +1,8 @@
 import { Container } from './styles'
+import { ReactNode } from 'react'
 
 type HeaderInternalPageNavigationProps = {
-  children: React.ReactNode
+  children: ReactNode
   current: string
 }
 

@@ -1,20 +1,18 @@
-import Head from "next/head";
-import Image from "next/image";
-import { GetStaticProps } from "next/types";
-import Stripe from "stripe";
-import { Product } from "../@types/product";
-import ProductCard from "../components/ProductCard";
-import { stripe } from "../services/stripe";
-import { ProductsContainer, SpecialsContainer } from "../styles/pages/special";
+import Head from 'next/head'
+import Image from 'next/image'
+import { GetStaticProps } from 'next/types'
+import Stripe from 'stripe'
+import { Product } from '../@types/product'
+import ProductCard from '../components/ProductCard'
+import { ProductsContainer, SpecialsContainer } from '../styles/pages/special'
+import { useGetStripeProducts } from '../hooks/useGetStripeProducts'
+import * as React from 'react'
 
 export const getStaticProps: GetStaticProps = async () => {
-  const specialsResponse = await stripe.products.search({
-    query: "metadata['special']:'true'",
-    expand: ["data.default_price"],
-  });
+  const specialsResponse = await useGetStripeProducts('true', 'special')
 
-  const products = specialsResponse.data.map((product) => {
-    const price = product.default_price as Stripe.Price;
+  const products = specialsResponse.map((product) => {
+    const price = product.default_price as Stripe.Price
 
     return {
       id: product.id,
@@ -23,8 +21,8 @@ export const getStaticProps: GetStaticProps = async () => {
       order: product.metadata.order,
       price: price.unit_amount / 100,
       promotion: product.metadata.promotion,
-    };
-  });
+    }
+  })
 
   return {
     props: {
@@ -32,12 +30,12 @@ export const getStaticProps: GetStaticProps = async () => {
     },
 
     revalidate: 60 * 60 * 24, // 24h
-  };
-};
+  }
+}
 
 type SpecialsProps = {
-  products: Product[];
-};
+  products: Product[]
+}
 
 export default function Specials({ products }: SpecialsProps) {
   return (
@@ -63,10 +61,10 @@ export default function Specials({ products }: SpecialsProps) {
                 imageUrl={product.imageUrl}
                 promotion={product.promotion}
               />
-            );
+            )
           })}
         </ProductsContainer>
       </SpecialsContainer>
     </>
-  );
+  )
 }

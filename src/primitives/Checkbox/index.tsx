@@ -2,6 +2,7 @@ import { Indicator } from '@radix-ui/react-checkbox'
 import 'animate.css'
 import { Check } from 'phosphor-react'
 import { CheckboxRoot, Container } from './styles'
+import React from 'react'
 
 type CheckboxProps = {
   children: React.ReactNode
@@ -11,8 +12,8 @@ type CheckboxProps = {
 }
 
 export default function Checkbox({
-  children,
   id,
+  children,
   checked,
   onCheckedChange,
 }: CheckboxProps) {

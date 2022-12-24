@@ -7,12 +7,10 @@ import SliderHeaderBrand from '../SliderHeaderBrand'
 import { Container } from './styles'
 
 type PumaOfferContainerProps = {
-  pumaOfferProducts: Product[]
+  pumaProducts: Product[]
 }
 
-export default function PumaOfferContainer({
-  pumaOfferProducts,
-}: PumaOfferContainerProps) {
+export default function PumaOfferContainer({ pumaProducts }: PumaOfferContainerProps) {
   const { nextSlide, prevSlide } = useGlobalContext()
   const [sliderRef, instanceRef] = useKeenSlider({
     loop: true,
@@ -41,7 +39,7 @@ export default function PumaOfferContainer({
 
       <div ref={sliderRef} className="keen-slider">
         <section className="keen-slider__slide">
-          {pumaOfferProducts.slice(0, 5).map((product) => {
+          {pumaProducts.slice(0, 5).map((product) => {
             return (
               <ProductCard
                 id={product.id}
@@ -56,7 +54,7 @@ export default function PumaOfferContainer({
         </section>
 
         <section className="keen-slider__slide">
-          {pumaOfferProducts.slice(5).map((product) => {
+          {pumaProducts.slice(5).map((product) => {
             return (
               <ProductCard
                 id={product.id}

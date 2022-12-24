@@ -4,16 +4,13 @@ import { GetStaticProps } from 'next/types'
 import Stripe from 'stripe'
 import { Product } from '../@types/product'
 import ProductCard from '../components/ProductCard'
-import { stripe } from '../services/stripe'
 import { ProductsContainer, PumaContainer } from '../styles/pages/puma'
+import { useGetStripeProducts } from '../hooks/useGetStripeProducts'
 
 export const getStaticProps: GetStaticProps = async () => {
-  const pumaResponse = await stripe.products.search({
-    query: "metadata['brand']:'puma'",
-    expand: ['data.default_price'],
-  })
+  const pumaResponse = await useGetStripeProducts('brand', 'puma')
 
-  const products = pumaResponse.data.map((product) => {
+  const products = pumaResponse.map((product) => {
     const price = product.default_price as Stripe.Price
 
     return {

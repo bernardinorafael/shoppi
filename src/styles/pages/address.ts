@@ -40,7 +40,7 @@ export const AddressContainer = styled.div`
   background-color: ${({ theme }) => theme.COLORS.primary[1200]};
   border: none;
   box-shadow: 0 2px 1px 0 rgb(0 0 0 / 16%);
-	
+
   header {
     width: 100%;
     display: flex;
@@ -51,6 +51,7 @@ export const AddressContainer = styled.div`
 
     > strong {
       font-size: 1rem;
+      text-transform: capitalize;
     }
 
     em {

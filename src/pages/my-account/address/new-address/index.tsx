@@ -12,17 +12,38 @@ import {
   Container,
   FormContainer,
   Input,
+  InputCep,
+  InputContainer,
 } from '../../../../styles/pages/new-address'
 import useAddressContext from '../../../../contexts/AddressContext'
 import { useEffect } from 'react'
+import axios from 'axios'
+import { useRouter } from 'next/router'
+
+type AddressResponse = {
+  bairro: string
+  cep: string
+  localidade: string
+  logradouro: string
+  uf: string
+}
 
 const newAddressValidationSchema = z.object({
-  zip: z.string().regex(new RegExp('(^\\d{5})\\-?(\\d{3}$).*'), 'CEP Inválido'),
+  zip: z
+    .string({ required_error: 'CEP é um campo obrigatório' })
+    .regex(
+      new RegExp('(^\\d{5})\\-?(\\d{3}$).*'),
+      'Precisamos de um CEP válido',
+    ),
   city: z.string(),
   state: z.string(),
-  street: z.string().min(1, '* indica campo obrigatório'),
-  number: z.string().min(1, '* indica campo obrigatório').max(8, 'Máximo permitido: 8'),
-  district: z.string().min(1, '* indica campo obrigatório'),
+  addressName: z.string().min(1, 'Dê um nome ao seu endereço'),
+  street: z.string().min(1, 'Endereço é um campo obrigatório'),
+  number: z
+    .string({ required_error: 'Número é um campo obrigatório' })
+    .min(1, 'Número é um campo obrigatório')
+    .max(8, 'Máximo permitido: 8'),
+  district: z.string().min(1, 'Bairro é um campo obrigatório'),
   complement: z.string().optional(),
   isCurrentAddress: z.boolean().nullable(),
 })
@@ -30,6 +51,7 @@ const newAddressValidationSchema = z.object({
 type NewAddressForm = z.infer<typeof newAddressValidationSchema>
 
 export default function NewAddress() {
+  const router = useRouter()
   const { createNewAddress } = useAddressContext()
   const {
     register,
@@ -37,7 +59,7 @@ export default function NewAddress() {
     watch,
     control,
     setValue,
-    reset,
+    setFocus,
     formState: { isSubmitting, errors },
   } = useForm<NewAddressForm>({
     resolver: zodResolver(newAddressValidationSchema),
@@ -50,7 +72,24 @@ export default function NewAddress() {
     await new Promise((resolve) => setTimeout(resolve, 800))
 
     createNewAddress(data)
-    reset()
+    await router.push('/my-account/address')
+  }
+
+  async function handleGetCepAddress(cep: string) {
+    try {
+      const response = await axios.get<AddressResponse>(
+        `https://viacep.com.br/ws/${cep}/json/`,
+      )
+
+      setValue('city', response.data.localidade)
+      setValue('district', response.data.bairro)
+      setValue('state', response.data.uf)
+      setValue('street', response.data.logradouro)
+
+      setFocus('number')
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   function replaceInputValue(value: string | undefined) {
@@ -88,35 +127,50 @@ export default function NewAddress() {
         </div>
 
         <FormContainer onSubmit={handleSubmit(handleCreateNewAddress)}>
-          <div>
+          <InputContainer>
+            <label htmlFor="address-name">Nome do endereço*</label>
+            <Input
+              autoFocus
+              error={!!errors.addressName}
+              id="address-name"
+              type="text"
+              placeholder="Ex: Casa"
+              {...register('addressName')}
+            />
+            <span>{errors.addressName?.message}</span>
+          </InputContainer>
+
+          <InputContainer>
             <label htmlFor="zip">CEP*</label>
             <Input
-              error={!!errors.zip?.message}
+              autoFocus
+              error={!!errors.zip}
               id="zip"
               type="text"
               maxLength={8}
-              placeholder="88915-000"
+              placeholder="88915000"
               {...register('zip')}
+              onBlur={() => handleGetCepAddress(zip)}
             />
             <span>{errors.zip?.message}</span>
-          </div>
+          </InputContainer>
 
-          <div>
+          <InputContainer>
             <label htmlFor="street">Endereço*</label>
             <Input
-              error={!!errors.street?.message}
+              error={!!errors.street}
               placeholder="Rua 04 de novembro"
               id="street"
               type="text"
               {...register('street')}
             />
             <span>{errors.street?.message}</span>
-          </div>
+          </InputContainer>
 
-          <div>
+          <InputContainer>
             <label htmlFor="number">Número da residência*</label>
             <Input
-              error={!!errors.number?.message}
+              error={!!errors.number}
               placeholder="192 ou S/N"
               id="number"
               type="text"
@@ -124,54 +178,54 @@ export default function NewAddress() {
               {...register('number')}
             />
             <span>{errors.number?.message}</span>
-          </div>
+          </InputContainer>
 
-          <div>
+          <InputContainer>
             <label htmlFor="complement">Complemento</label>
             <Input
-              error={!!errors.complement?.message}
+              error={!!errors.complement}
               placeholder="Apartamento, casa, andar, etc..."
               id="complement"
               type="text"
               {...register('complement')}
             />
             <span>{errors.complement?.message}</span>
-          </div>
+          </InputContainer>
 
-          <div>
-            <label htmlFor="district">Bairro*</label>
-            <Input
-              error={!!errors.district?.message}
-              placeholder="São Fagundes"
-              id="district"
-              type="text"
-              {...register('district')}
-            />
-            <span>{errors.district?.message}</span>
-          </div>
+          <div style={{ display: 'flex', width: '100%', gap: '2rem' }}>
+            <InputContainer>
+              <label htmlFor="district">Bairro*</label>
+              <Input
+                error={!!errors.district}
+                placeholder="São Fagundes"
+                id="district"
+                type="text"
+                {...register('district')}
+              />
+              <span>{errors.district?.message}</span>
+            </InputContainer>
 
-          <div>
-            <label htmlFor="city'">Cidade*</label>
-            <Input
-              error={!!errors.city?.message}
-              placeholder="Florianópolis"
-              id="city'"
-              type="text"
-              {...register('city')}
-            />
-            <span>{errors.city?.message}</span>
-          </div>
+            <InputContainer>
+              <label htmlFor="city'">Cidade*</label>
+              <Input
+                placeholder="Florianópolis"
+                id="city'"
+                type="text"
+                disabled
+                {...register('city')}
+              />
+            </InputContainer>
 
-          <div>
-            <label htmlFor="state">Estado*</label>
-            <Input
-              error={!!errors.state?.message}
-              placeholder="SC"
-              id="state"
-              type="text"
-              {...register('state')}
-            />
-            <span>{errors.state?.message}</span>
+            <InputContainer>
+              <label htmlFor="state">Estado*</label>
+              <InputCep
+                placeholder="UF"
+                id="state"
+                disabled
+                type="text"
+                {...register('state')}
+              />
+            </InputContainer>
           </div>
 
           <Controller

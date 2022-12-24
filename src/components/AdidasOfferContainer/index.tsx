@@ -7,11 +7,11 @@ import SliderHeaderBrand from '../SliderHeaderBrand'
 import { Container } from './styles'
 
 type AdidasOfferContainerProps = {
-  adidasOfferProducts: Product[]
+  adidasProducts: Product[]
 }
 
 export default function AdidasOfferContainer({
-  adidasOfferProducts,
+  adidasProducts,
 }: AdidasOfferContainerProps) {
   const { nextSlide, prevSlide } = useGlobalContext()
   const [sliderRef, instanceRef] = useKeenSlider({
@@ -41,7 +41,7 @@ export default function AdidasOfferContainer({
 
       <div ref={sliderRef} className="keen-slider">
         <section className="keen-slider__slide">
-          {adidasOfferProducts.map((product) => {
+          {adidasProducts.slice(5).map((product) => {
             return (
               <ProductCard
                 id={product.id}
@@ -56,7 +56,7 @@ export default function AdidasOfferContainer({
         </section>
 
         <section className="keen-slider__slide">
-          {adidasOfferProducts.map((product) => {
+          {adidasProducts.slice(0, 5).map((product) => {
             return (
               <ProductCard
                 id={product.id}

@@ -4,16 +4,13 @@ import { GetStaticProps } from 'next/types'
 import Stripe from 'stripe'
 import { Product } from '../@types/product'
 import ProductCard from '../components/ProductCard'
-import { stripe } from '../services/stripe'
 import { ConverseContainer, ProductsContainer } from '../styles/pages/converse'
+import { useGetStripeProducts } from '../hooks/useGetStripeProducts'
 
 export const getStaticProps: GetStaticProps = async () => {
-  const converseResponse = await stripe.products.search({
-    query: "metadata['brand']:'converse'",
-    expand: ['data.default_price'],
-  })
+  const converseResponse = await useGetStripeProducts('brand', 'converse')
 
-  const products = converseResponse.data.map((product) => {
+  const products = converseResponse.map((product) => {
     const price = product.default_price as Stripe.Price
 
     return {

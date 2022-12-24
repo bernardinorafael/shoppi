@@ -7,11 +7,11 @@ import SliderHeaderBrand from '../SliderHeaderBrand'
 import { Container } from './styles'
 
 type ConverseOfferContainerProps = {
-  converseOfferProducts: Product[]
+  converseProducts: Product[]
 }
 
 export default function ConverseOfferContainer({
-  converseOfferProducts,
+  converseProducts,
 }: ConverseOfferContainerProps) {
   const { nextSlide, prevSlide } = useGlobalContext()
   const [sliderRef, instanceRef] = useKeenSlider({
@@ -41,7 +41,7 @@ export default function ConverseOfferContainer({
 
       <div ref={sliderRef} className="keen-slider">
         <section className="keen-slider__slide">
-          {converseOfferProducts.slice(5).map((product) => {
+          {converseProducts.slice(5).map((product) => {
             return (
               <ProductCard
                 id={product.id}
@@ -56,7 +56,7 @@ export default function ConverseOfferContainer({
         </section>
 
         <section className="keen-slider__slide">
-          {converseOfferProducts.slice(0, 5).map((product) => {
+          {converseProducts.slice(0, 5).map((product) => {
             return (
               <ProductCard
                 id={product.id}
