@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const Container = styled.header`
   align-items: center;
@@ -22,8 +22,8 @@ export const Container = styled.header`
       font-family: ${({ theme }) => theme.FONT_FAMILY.cursive};
       font-size: 2.25rem;
       letter-spacing: -3px;
-      user-select: none;
       text-decoration: underline;
+      user-select: none;
     }
 
     > div:first-child {
@@ -68,7 +68,7 @@ export const Container = styled.header`
         &::after {
           background-color: ${({ theme }) => theme.COLORS.primary[200]};
           bottom: -4px;
-          content: "";
+          content: '';
           height: 2px;
           pointer-events: none;
           transform: translateY(8px);
@@ -90,7 +90,7 @@ export const Container = styled.header`
       }
     }
   }
-`;
+`
 
 export const ButtonNavbar = styled.button`
   background-color: transparent;
@@ -101,16 +101,31 @@ export const ButtonNavbar = styled.button`
   outline: none;
   padding: 0.5rem;
   position: relative;
-`;
+
+  > div {
+    position: absolute;
+    background-color: ${({ theme }) => theme.COLORS.red['200']};
+    top: 0;
+    right: 2px;
+    color: ${({ theme }) => theme.COLORS.primary['1200']};
+    font-size: 0.775rem;
+    height: 20px;
+    aspect-ratio: 1 / 1;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+`
 
 export const SearchFormContainer = styled.form`
   align-items: center;
   background-color: ${({ theme }) => theme.COLORS.primary[1200]};
-  border-radius: 1px;
   border: 1px solid ${({ theme }) => theme.COLORS.primary[900]};
   display: flex;
   height: 2.5rem;
   justify-content: space-between;
+  border-radius: 6px;
   max-width: 500px;
   padding-left: 1rem;
   width: 100%;
@@ -137,7 +152,7 @@ export const SearchFormContainer = styled.form`
       box-shadow: none;
     }
   }
-`;
+`
 
 export const SearchButton = styled.button`
   background: transparent;
@@ -150,7 +165,7 @@ export const SearchButton = styled.button`
   svg {
     color: ${({ theme }) => theme.COLORS.primary[400]};
   }
-`;
+`
 
 export const ButtonMyProfile = styled.button`
   align-items: center;
@@ -170,4 +185,4 @@ export const ButtonMyProfile = styled.button`
     border: 1px solid ${({ theme }) => theme.COLORS.primary[700]};
     transition: border-color 200ms;
   }
-`;
+`

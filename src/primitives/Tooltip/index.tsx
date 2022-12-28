@@ -1,5 +1,5 @@
-import { Root, Trigger, Portal } from '@radix-ui/react-tooltip'
-import { TooltipContent } from './styles'
+import { Portal, Root, Trigger } from '@radix-ui/react-tooltip'
+import { TooltipArrow, TooltipContent } from './styles'
 import React from 'react'
 
 type TooltipProps = {
@@ -30,6 +30,8 @@ export default function Tooltip({
           alignOffset={alignOffset}
           sideOffset={sideOffset}
         >
+          <TooltipArrow width={15} height={10} />
+
           {render}
         </TooltipContent>
       </Portal>

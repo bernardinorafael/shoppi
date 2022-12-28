@@ -17,6 +17,7 @@ export const Container = styled.div`
   background-color: ${({ theme }) => theme.COLORS.primary[1000]};
   z-index: 101;
   display: flex;
+  border-radius: 6px;
   align-items: center;
   border: 1px solid ${({ theme }) => theme.COLORS.primary[900]};
   justify-content: center;

@@ -1,6 +1,11 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import Link from 'next/link'
-import { CaretDown, HeartStraight, MagnifyingGlass, ShoppingCart } from 'phosphor-react'
+import {
+  CaretDown,
+  HeartStraight,
+  MagnifyingGlass,
+  ShoppingCart,
+} from 'phosphor-react'
 import React from 'react'
 import DropdownMenu from '../../primitives/DropdownMenu'
 import Popover from '../../primitives/Popover'
@@ -16,9 +21,11 @@ import {
   SearchButton,
   SearchFormContainer,
 } from './styles'
+import { useShoppingCart } from 'use-shopping-cart'
 
 export default function Header() {
   const [isCartDialogOpen, setIsCartDialogOpen] = React.useState(false)
+  const { cartCount } = useShoppingCart()
 
   function onCloseCartDialog() {
     setIsCartDialogOpen(!isCartDialogOpen)
@@ -29,6 +36,7 @@ export default function Header() {
       <section>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <Link href="/">Shoppi</Link>
+
           <SearchFormContainer>
             <Popover
               side="bottom"
@@ -39,6 +47,7 @@ export default function Header() {
             >
               <input placeholder="Procurar produtos e marcas" type="text" />
             </Popover>
+
             <Tooltip render="Procurar">
               <SearchButton type="button">
                 <MagnifyingGlass size={24} />
@@ -65,6 +74,7 @@ export default function Header() {
             <Dialog.Trigger asChild>
               <ButtonNavbar>
                 <ShoppingCart size={28} weight="regular" />
+                {cartCount > 0 && <div>{cartCount}</div>}
               </ButtonNavbar>
             </Dialog.Trigger>
 

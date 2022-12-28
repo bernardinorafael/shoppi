@@ -1,64 +1,85 @@
-import * as React from 'react'
+import { createContext, ReactNode, useContext, useState } from 'react'
 import { v4 as uuid } from 'uuid'
 import { Address } from '../@types/address'
 
 type AddressContextType = {
-  adresses: Address[]
+  addresses: Address[]
   createNewAddress: (data: Address) => void
+  deleteAddress: (id: string) => void
 }
 
 type AddressForm = {
-  zip: string
   city: string
+  client: string
+  complement: string
+  district: string
+  fone: string
+  isCurrentAddress: boolean
+  number: string
   state: string
   street: string
-  number: string
-  district: string
-  complement: string
-  addressName: string
-  isCurrentAddress: boolean
+  type: 'work' | 'house'
+  zip: string
 }
 
-export const AddressContext = React.createContext<AddressContextType | null>(
-  null,
-)
+export const AddressContext = createContext<AddressContextType | null>(null)
 
-export function AddressContextProvider({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  const [adresses, setAddresses] = React.useState<Address[]>([])
+export function AddressContextProvider({ children }: { children: ReactNode }) {
+  const [addresses, setAddresses] = useState<Address[]>([
+    {
+      id: '1',
+      city: 'Sobral',
+      client: 'Rafael Bernardino',
+      district: 'Campo dos Velho',
+      fone: '(48) 98856-6239',
+      number: '1220',
+      state: 'CE',
+      street: 'Rua Marechal Humberto A.C. Branco',
+      type: 'house',
+      zip: '62030173',
+    },
+  ])
+
+  function deleteAddress(id: string) {
+    const newAddressList = addresses.filter((address) => {
+      return address.id !== id
+    })
+
+    setAddresses(newAddressList)
+  }
 
   function createNewAddress(data: AddressForm) {
     setAddresses((state) => [
       {
-        id: uuid(),
-        zip: data.zip,
         city: data.city,
-        state: data.state,
-        number: data.number,
-        street: data.street,
-        district: data.district,
+        client: data.client,
         complement: data.complement,
-        addressName: data.addressName,
+        district: data.district,
+        fone: data.fone,
+        id: uuid(),
         isCurrentAddress: data.isCurrentAddress,
+        number: data.number,
+        state: data.state,
+        street: data.street,
+        type: data.type,
+        zip: data.zip,
       },
       ...state,
     ])
   }
 
   return (
-    <AddressContext.Provider value={{ createNewAddress, adresses }}>
+    <AddressContext.Provider
+      value={{ createNewAddress, deleteAddress, addresses }}
+    >
       {children}
     </AddressContext.Provider>
   )
 }
 
 export default function useAddressContext() {
-  const context = React.useContext(AddressContext)
+  const context = useContext(AddressContext)
 
-  if (!context) throw new Error('useCart cannot be used within AddressContext')
-
+  if (!context) throw new Error('useCart cannot be used outside AddressContext')
   return context
 }

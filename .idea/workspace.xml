@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="73efef26-2559-4c53-a5da-a56a74124fb4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/pages/product/[id].page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/prettier.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shoppi.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shoppi.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0so2qrWSBThVj-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0so2qrWSBThVj-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0so2qrWSBThVj-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0so2qrWSBThVj-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0soS9sx0kqTQc-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0soS9sx0kqTQc-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0soS9sx0kqTQc-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0soS9sx0kqTQc-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0spaKvsiGpYzt-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0spaKvsiGpYzt-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0spaKvsiGpYzt-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0spaKvsiGpYzt-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0sprfB8Ictyrh-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0sprfB8Ictyrh-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0sprfB8Ictyrh-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0sprfB8Ictyrh-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0sqNeBHxbx7oB-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0sqNeBHxbx7oB-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0sqNeBHxbx7oB-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0sqNeBHxbx7oB-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0srCGtM8VR2Y6-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0srCGtM8VR2Y6-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0srCGtM8VR2Y6-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0srCGtM8VR2Y6-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0sroWbatEvfie-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0sroWbatEvfie-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0sroWbatEvfie-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0sroWbatEvfie-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0ss2hDRgNGCaO-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0ss2hDRgNGCaO-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0ss2hDRgNGCaO-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0ss2hDRgNGCaO-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0sskM7E6FusWq-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0sskM7E6FusWq-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0sskM7E6FusWq-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0sskM7E6FusWq-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0stwkNW7vS6M6-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0stwkNW7vS6M6-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0stwkNW7vS6M6-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0stwkNW7vS6M6-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0wVvxsG6d4FAR-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0wVvxsG6d4FAR-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0wVvxsG6d4FAR-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0wVvxsG6d4FAR-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0wYGn0OvuSWns-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0wYGn0OvuSWns-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0wYGn0OvuSWns-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0wYGn0OvuSWns-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0wZWyX9wnHQIu-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0wZWyX9wnHQIu-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0wZWyX9wnHQIu-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0wZWyX9wnHQIu-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0was7AOOrQPSw-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0was7AOOrQPSw-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0was7AOOrQPSw-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0was7AOOrQPSw-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0wc9rJ0gBhxni-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0wc9rJ0gBhxni-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0wc9rJ0gBhxni-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0wc9rJ0gBhxni-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0wd5YSAJL1jF9-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0wd5YSAJL1jF9-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0wd5YSAJL1jF9-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0wd5YSAJL1jF9-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0weqPX5YlY3ZV-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0weqPX5YlY3ZV-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0weqPX5YlY3ZV-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0weqPX5YlY3ZV-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0wf3tTxhzmehp-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0wf3tTxhzmehp-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0wf3tTxhzmehp-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0wf3tTxhzmehp-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0wgp5KsNOVi3x-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0wgp5KsNOVi3x-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0wgp5KsNOVi3x-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0wgp5KsNOVi3x-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0whTB2SsT06lK-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0whTB2SsT06lK-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0whTB2SsT06lK-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0whTB2SsT06lK-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0x3lAbiwot8LA-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0x3lAbiwot8LA-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0x3lAbiwot8LA-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0x3lAbiwot8LA-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0x5ks007aEFmz-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0x5ks007aEFmz-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0x5ks007aEFmz-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0x5ks007aEFmz-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0x8cQCEua5wha-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0x8cQCEua5wha-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0x8cQCEua5wha-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0x8cQCEua5wha-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0x9WySfGeeSa5-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0x9WySfGeeSa5-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0x9WySfGeeSa5-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0x9WySfGeeSa5-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0xAE2Cauq4vCv-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0xAE2Cauq4vCv-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0xAE2Cauq4vCv-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0xAE2Cauq4vCv-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0xBILB5DsL1RR-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0xBILB5DsL1RR-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0xBILB5DsL1RR-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0xBILB5DsL1RR-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0xD9zrC0W9uQu-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0xD9zrC0W9uQu-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0xD9zrC0W9uQu-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0xD9zrC0W9uQu-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0xDYhNcfJs7w4-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0xDYhNcfJs7w4-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0xDYhNcfJs7w4-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0xDYhNcfJs7w4-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0xE6ztCFRjIcN-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0xE6ztCFRjIcN-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0xE6ztCFRjIcN-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0xE6ztCFRjIcN-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0xGWDapTmEE8o-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0xGWDapTmEE8o-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0xGWDapTmEE8o-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N0xGWDapTmEE8o-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1eokhXeuOlwLV-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1eokhXeuOlwLV-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1eokhXeuOlwLV-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1eokhXeuOlwLV-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1euQEsql5eFQC-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1euQEsql5eFQC-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1euQEsql5eFQC-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1euQEsql5eFQC-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1ezgGo0XFajMx-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1ezgGo0XFajMx-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1ezgGo0XFajMx-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1ezgGo0XFajMx-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1f5WjNHGYTup0-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1f5WjNHGYTup0-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1f5WjNHGYTup0-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1f5WjNHGYTup0-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1fBSB3RMpBTr6-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1fBSB3RMpBTr6-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1fBSB3RMpBTr6-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1fBSB3RMpBTr6-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1fF7N7Zi64aNN-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1fF7N7Zi64aNN-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1fF7N7Zi64aNN-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1fF7N7Zi64aNN-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1fJhKDEuq5ADe-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1fJhKDEuq5ADe-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1fJhKDEuq5ADe-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1fJhKDEuq5ADe-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1fOtDcZ2oVZfL-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1fOtDcZ2oVZfL-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1fOtDcZ2oVZfL-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1fOtDcZ2oVZfL-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1fRonDK5nRRVS-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1fRonDK5nRRVS-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1fRonDK5nRRVS-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1fRonDK5nRRVS-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1fUla6gEpAfly-a.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1fUla6gEpAfly-b.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1fUla6gEpAfly-c.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/products/prod_N1fUla6gEpAfly-d.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/@types/address.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/@types/address.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/@types/product.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/@types/product.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CartProduct/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CartProduct/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CartProduct/styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CartProduct/styles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ConverseOfferContainer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ConverseOfferContainer/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/DialogImageProduct/styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DialogImageProduct/styles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header/components/DialogCartContent/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/components/DialogCartContent/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header/components/DialogCartContent/styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/components/DialogCartContent/styles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header/components/DropdownMenuProfile/components/SubMenuAddress/styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/components/DropdownMenuProfile/components/SubMenuAddress/styles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header/components/DropdownMenuProfile/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/components/DropdownMenuProfile/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header/components/DropdownMenuProfile/styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/components/DropdownMenuProfile/styles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header/components/PopoverWishListContent/styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/components/PopoverWishListContent/styles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header/styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/styles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/HeaderInternalPageNavigation/styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/HeaderInternalPageNavigation/styles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SizeGuideContent/styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SizeGuideContent/styles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/contexts/AddressContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/contexts/AddressContext.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/contexts/CartContext.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/contexts/GlobalContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/contexts/GlobalContext.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/useGetStripeProducts.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/get-stripe-products.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/_app.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/_document.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/adidas.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/api/checkout-session.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/cart.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/converse.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/login.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/my-account/address/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/my-account/address/new-address/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/my-account/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/product/[id].tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/puma.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/register.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/special.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/primitives/Checkbox/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Checkbox/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/primitives/Checkbox/styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Checkbox/styles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/primitives/DropdownMenu/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/DropdownMenu/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/primitives/Tooltip/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Tooltip/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/primitives/Tooltip/styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Tooltip/styles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/global-style.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/global-style.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/pages/address.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/pages/adidas.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/pages/converse.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/pages/new-address.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/pages/product/product.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/pages/product/select-address.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/pages/puma.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/pages/special.ts" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2JVbj6oyhbr0WMzRrwocEUVPuTR" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "js.linters.configure.manually.selectedeslint": "true",
+    "last_opened_file_path": "/home/bernardino/Documentos/projects/shoppi/src/pages/api",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "/home/bernardino/Documentos/projects/shoppi/node_modules/eslint",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "/home/bernardino/Documentos/projects/shoppi/node_modules/prettier",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "ts.external.directory.path": "/home/bernardino/Documentos/projects/shoppi/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/pages/api" />
+      <recent name="$PROJECT_DIR$/public" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/helpers" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="73efef26-2559-4c53-a5da-a56a74124fb4" name="Changes" comment="" />
+      <created>1672166335026</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1672166335026</updated>
+      <workItem from="1672166337768" duration="1790000" />
+      <workItem from="1672168146353" duration="778000" />
+      <workItem from="1672168945790" duration="7000" />
+      <workItem from="1672179290376" duration="891000" />
+      <workItem from="1672180265012" duration="355000" />
+      <workItem from="1672184098513" duration="12502000" />
+      <workItem from="1672200432466" duration="599000" />
+      <workItem from="1672234006220" duration="23077000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

@@ -8,4 +8,5 @@ export type Product = {
   name: string
   price: number
   promotion: 'true' | 'false'
+  size: string
 }

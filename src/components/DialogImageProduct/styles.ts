@@ -40,6 +40,7 @@ export const DialogClose = styled(Close)`
   background-color: ${({ theme }) => theme.COLORS.primary[1100]};
   border: none;
   outline: none;
+	border-radius: 8px;
   line-height: 0;
   padding: 0.5rem;
   cursor: default;

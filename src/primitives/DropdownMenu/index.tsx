@@ -1,12 +1,13 @@
 import { Root, Trigger, Portal } from '@radix-ui/react-dropdown-menu'
+import { ReactNode } from 'react'
 
 type DropdownMenuProps = {
-  trigger: React.ReactNode
-  children: React.ReactNode
+  trigger: ReactNode
+  children: ReactNode
   modal?: boolean
 }
 
-export default function DropdownMenuD({
+export default function DropdownMenu({
   trigger,
   children,
   modal = true,

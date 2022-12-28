@@ -1,8 +1,8 @@
 import { Indicator } from '@radix-ui/react-checkbox'
 import 'animate.css'
 import { Check } from 'phosphor-react'
-import { CheckboxRoot, Container } from './styles'
 import React from 'react'
+import { CheckboxRoot, Container } from './styles'
 
 type CheckboxProps = {
   children: React.ReactNode
@@ -24,7 +24,7 @@ export default function Checkbox({
           <Check
             size={20}
             weight="bold"
-            className="animate__animated animate__bounceIn animate__faster"
+            className="animate__animated animate__bounceIn "
           />
         </Indicator>
       </CheckboxRoot>

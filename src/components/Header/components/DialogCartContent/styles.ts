@@ -40,7 +40,7 @@ export const DialogContent = styled(Dialog.Content)`
   overflow-y: auto;
 
   ::-webkit-scrollbar {
-    width: 0.5rem;
+    width: 5px;
     background: ${({ theme }) => theme.COLORS.primary[500]};
   }
 
@@ -56,6 +56,7 @@ export const DialogClose = styled(Dialog.Close)`
   top: 10px;
   border: none;
   outline: none;
+	border-radius: 6px;
   line-height: 0;
   padding: 0.225rem;
   background-color: transparent;
@@ -129,6 +130,7 @@ export const ButtonsContainer = styled.section`
   button {
     display: flex;
     height: 3.5rem;
+    font-size: 1rem;
     align-items: center;
     justify-content: center;
     width: 100%;

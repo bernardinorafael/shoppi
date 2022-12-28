@@ -20,7 +20,6 @@ export default function ConverseOfferContainer({
       perView: 1,
     },
   })
-
   function handleNextSlide() {
     nextSlide(instanceRef)
   }

@@ -5,8 +5,9 @@ export type Address = {
   complement?: string
   district?: string
   city?: string
+  type?: 'work' | 'house'
+  state?: string
+  client?: string
+  fone?: string
   id?: string
-  state?: string
-  addressName?: string
-  state?: string
 }

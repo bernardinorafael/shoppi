@@ -29,7 +29,7 @@ export const GlobalStyle = createGlobalStyle`
 	}
 	
 	::-webkit-scrollbar {
-		width: .4rem;
+		width: .5rem;
 		background: ${({ theme }) => theme.COLORS.primary[700]};
 	}
 

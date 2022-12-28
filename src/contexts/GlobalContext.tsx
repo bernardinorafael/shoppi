@@ -1,26 +1,26 @@
 import { KeenSliderInstance } from 'keen-slider'
-import * as React from 'react'
+import { ReactNode, createContext, useContext, MutableRefObject } from 'react'
 
 type GlobalContextType = {
-  nextSlide: (ref: React.MutableRefObject<KeenSliderInstance>) => void
-  prevSlide: (ref: React.MutableRefObject<KeenSliderInstance>) => void
+  nextSlide: (ref: MutableRefObject<KeenSliderInstance>) => void
+  prevSlide: (ref: MutableRefObject<KeenSliderInstance>) => void
   formatCurrency: Intl.NumberFormat
 }
 
-export const GlobalContext = React.createContext<GlobalContextType | null>(null)
+export const GlobalContext = createContext<GlobalContextType | null>(null)
 
-export function GlobalProvider({ children }: { children: React.ReactNode }) {
+export function GlobalProvider({ children }: { children: ReactNode }) {
   const formatCurrency = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL',
     minimumFractionDigits: 2,
   })
 
-  function nextSlide(ref: React.MutableRefObject<KeenSliderInstance>) {
+  function nextSlide(ref: MutableRefObject<KeenSliderInstance>) {
     ref.current.next()
   }
 
-  function prevSlide(ref: React.MutableRefObject<KeenSliderInstance>) {
+  function prevSlide(ref: MutableRefObject<KeenSliderInstance>) {
     ref.current.prev()
   }
 
@@ -32,9 +32,10 @@ export function GlobalProvider({ children }: { children: React.ReactNode }) {
 }
 
 export default function useGlobalContext() {
-  const context = React.useContext(GlobalContext)
+  const context = useContext(GlobalContext)
 
-  if (!context) throw new Error('useGlobalContext cannot be used outside GlobalProvider')
+  if (!context)
+    throw new Error('useGlobalContext cannot be used outside GlobalProvider')
 
   return context
 }

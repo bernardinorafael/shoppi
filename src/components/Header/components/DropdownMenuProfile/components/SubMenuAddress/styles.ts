@@ -17,15 +17,15 @@ export const DropdownSubContent = styled(SubContent)`
   width: 220px;
   background-color: ${({ theme }) => theme.COLORS.primary[1000]};
   z-index: 210;
-  padding: 0.5rem 0;
+  padding: 0.5rem;
   box-shadow: 0px 10px 38px -10px rgba(22, 23, 24, 0.35),
     0px 10px 20px -15px rgba(22, 23, 24, 0.2);
+  border-radius: 6px;
 
   > div {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    /* padding: 0.125rem 0; */
   }
 `
 
@@ -39,8 +39,9 @@ export const DropdownItem = styled(Item)`
   gap: 0.5rem;
   padding: 0.225rem 1rem;
   position: relative;
+	border-radius: 6px;
 
   &[data-highlighted] {
-    background-color: ${({ theme }) => theme.COLORS.primary[700]};
+    background-color: ${({ theme }) => theme.COLORS.primary[600]};
   }
 `

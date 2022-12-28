@@ -1,15 +1,37 @@
 import Image from 'next/image'
-import { Container, ProductContent } from './styles'
+import { Container, ProductBox, QuantityBox } from './styles'
+import useGlobalContext from '../../contexts/GlobalContext'
+import { TrashSimple } from 'phosphor-react'
+import { useShoppingCart } from 'use-shopping-cart'
+import ControlQuantityButton from './components/ControlQuantityButton'
 
-export default function CartProduct() {
+type CardProductProps = {
+  price: number
+  name: string
+  quantity: number
+  imageUrl: string
+  productId: string
+  value: number
+}
+
+export default function CartProduct({
+  imageUrl,
+  name,
+  price,
+  value,
+  quantity,
+  productId,
+}: CardProductProps) {
+  const { formatCurrency } = useGlobalContext()
+
   return (
     <Container>
       <div>
-        <Image src="/products/prod_N0so2qrWSBThVj-a.webp" alt="" fill />
+        <Image src={imageUrl} alt="" fill />
       </div>
 
-      <ProductContent>
-        <strong>Adidas Xbox NMD_V3</strong>
+      <ProductBox>
+        <strong>{name}</strong>
 
         <section>
           <div>
@@ -19,15 +41,19 @@ export default function CartProduct() {
             <span>
               Endereço: <strong>Casa</strong>
             </span>
-            <em>1 unidade</em>
+
+            <QuantityBox>
+              <strong>{quantity} un.</strong>
+              <ControlQuantityButton productId={productId} />
+            </QuantityBox>
           </div>
 
           <div>
-            <span>R$ 399,00</span>
-            <span>R$ 299,00</span>
+            <span>{formatCurrency.format(price)} /un</span>
+            <span>{formatCurrency.format(value)}</span>
           </div>
         </section>
-      </ProductContent>
+      </ProductBox>
     </Container>
   )
 }

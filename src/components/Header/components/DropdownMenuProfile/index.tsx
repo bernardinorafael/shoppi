@@ -8,17 +8,12 @@ import {
   DropdownSubTrigger,
   LoginLinkButton,
   NavigationContainer,
-  RegisterLinkButton,
 } from './styles'
 
 export default function DropdownMenuProfile() {
   return (
     <Container align="end">
       <div>
-        <Item asChild>
-          <RegisterLinkButton href="/register">Registrar</RegisterLinkButton>
-        </Item>
-
         <Item asChild>
           <LoginLinkButton href="/login">Entrar</LoginLinkButton>
         </Item>
@@ -33,7 +28,7 @@ export default function DropdownMenuProfile() {
               <CaretRight weight="bold" size={16} />
             </DropdownSubTrigger>
           </SubTrigger>
-					
+
           <SubMenuAddress />
         </Sub>
 
