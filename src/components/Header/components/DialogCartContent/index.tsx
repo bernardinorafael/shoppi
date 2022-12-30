@@ -1,6 +1,6 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import * as React from 'react'
-import Link from 'next/link'
+import { useState } from 'react'
 import { CircleNotch, X } from 'phosphor-react'
 import {
   ButtonsContainer,
@@ -15,27 +15,30 @@ import CartProduct from '../../../CartProduct'
 import { useShoppingCart } from 'use-shopping-cart'
 import useGlobalContext from '../../../../contexts/GlobalContext'
 import axios from 'axios'
-import { useState } from 'react'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 
-type DialogCartContentProps = {
-  onCloseCartDialog: () => void
-}
-
-export default function DialogCartContent({
-  onCloseCartDialog,
-}: DialogCartContentProps) {
+export default function DialogCartContent() {
   const [isCreatingCheckout, setIsCreatingCheckout] = useState(false)
   const { formatCurrency } = useGlobalContext()
-  const { cartDetails, totalPrice } = useShoppingCart()
-
+  const { cartDetails, totalPrice, cartCount } = useShoppingCart()
+  const session = useSession()
   const cartProducts = Object.values(cartDetails ?? {})
+  const router = useRouter()
+
+  const isUserAuthenticated = session.status === 'authenticated'
 
   async function handleBuyProductsCart() {
+    if (!isUserAuthenticated) {
+      return router.push('/login-page')
+    }
+
     try {
       setIsCreatingCheckout(true)
 
       const response = await axios.post('/api/checkout-session-cart', {
         cartProducts,
+        email: session.data.user.email,
       })
 
       const { checkoutUrl } = response.data
@@ -51,20 +54,26 @@ export default function DialogCartContent({
       <DialogOverlay />
 
       <DialogContent>
-        <DialogClose>
-          <X weight="bold" size={26} />
-        </DialogClose>
+        <div>
+          <strong>{`Carrinho (${cartCount})`}</strong>
+
+          <DialogClose>
+            <X weight="bold" size={26} />
+          </DialogClose>
+        </div>
 
         <CartContent>
           {cartProducts.map((product) => {
             return (
               <CartProduct
+                key={product.id}
                 value={product.value}
                 name={product.name}
                 price={product.price}
                 quantity={product.quantity}
                 imageUrl={product.image}
                 productId={product.id}
+                size={product.size}
               />
             )
           })}
@@ -90,16 +99,13 @@ export default function DialogCartContent({
               onClick={handleBuyProductsCart}
             >
               <CircleNotch size={20} weight="bold" />
-              Avançar para o Checkout
+              Finalizar compra
             </button>
           ) : (
             <button type="button" onClick={handleBuyProductsCart}>
-              Avançar para o Checkout
+              Finalizar compra
             </button>
           )}
-          <Link onClick={onCloseCartDialog} href="/cart">
-            Editar carrinho
-          </Link>
         </ButtonsContainer>
       </DialogContent>
     </Dialog.Portal>

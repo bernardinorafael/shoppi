@@ -1,34 +1,51 @@
+import { zodResolver } from '@hookform/resolvers/zod'
+import axios from 'axios'
+import { GetServerSideProps } from 'next'
+import { unstable_getServerSession } from 'next-auth'
 import Head from 'next/head'
 import Link from 'next/link'
-import { CaretRight, CircleNotch, House, SuitcaseSimple } from 'phosphor-react'
-import { z } from 'zod'
-import * as React from 'react'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Controller, useForm } from 'react-hook-form'
-import HeaderInternalPageNavigation from '../../../../components/HeaderInternalPageNavigation'
-import Checkbox from '../../../../primitives/Checkbox'
-import {
-  ButtonCreateNewAddress,
-  Container,
-  FormContainer,
-  InputContainer,
-  InputDisabled,
-  Input,
-  RadioRoot,
-  RadioItem,
-} from './styles'
-import useAddressContext from '../../../../contexts/AddressContext'
-import { useEffect } from 'react'
-import axios from 'axios'
 import { useRouter } from 'next/router'
+import { CaretRight, CircleNotch, House, SuitcaseSimple } from 'phosphor-react'
+import { useEffect } from 'react'
+import { Controller, useForm } from 'react-hook-form'
+import { z } from 'zod'
+import HeaderInternalPageNavigation from '../../../components/HeaderInternalPageNavigation'
 import {
-  REGEX_CEP_VALIDATION,
-  REGEX_FONE_VALIDATION,
-} from '../../../../helpers/regex'
+	normalizeCepNumber,
+	normalizeFoneNumber
+} from '../../../helpers/input-mask'
 import {
-  normalizeCepNumber,
-  normalizeFoneNumber,
-} from '../../../../helpers/input-mask'
+	REGEX_CEP_VALIDATION,
+	REGEX_FONE_VALIDATION
+} from '../../../helpers/regex'
+import { authOptions } from '../../api/auth/[...nextauth].api'
+import {
+	ButtonCreateNewAddress,
+	Container,
+	FormContainer,
+	Input,
+	InputContainer,
+	InputDisabled,
+	RadioItem,
+	RadioRoot
+} from './styles'
+
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const session = await unstable_getServerSession(req, res, authOptions)
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/login-page',
+        permanent: false,
+      },
+    }
+  }
+
+  return {
+    props: {},
+  }
+}
 
 type AddressResponse = {
   bairro: string
@@ -60,7 +77,6 @@ const newAddressValidationSchema = z.object({
     .max(8, 'Máximo permitido: 8'),
   district: z.string().min(1, 'Bairro é um campo obrigatório'),
   complement: z.string().optional(),
-  isCurrentAddress: z.boolean().nullable(),
   type: z.enum(['work', 'house'], { required_error: 'Campo obrigatório' }),
 })
 
@@ -68,10 +84,9 @@ type NewAddressForm = z.infer<typeof newAddressValidationSchema>
 
 export default function NewAddress() {
   const router = useRouter()
-  const { createNewAddress } = useAddressContext()
   const {
-    handleSubmit,
     control,
+    handleSubmit,
     register,
     setFocus,
     setValue,
@@ -79,16 +94,27 @@ export default function NewAddress() {
     formState: { isSubmitting, errors },
   } = useForm<NewAddressForm>({
     resolver: zodResolver(newAddressValidationSchema),
-    defaultValues: {
-      isCurrentAddress: false,
-    },
   })
 
   async function handleCreateNewAddress(data: NewAddressForm) {
-    await new Promise((resolve) => setTimeout(resolve, 800))
+    try {
+      await axios.post('/api/create-address', {
+        city: data.city,
+        client: data.client,
+        complement: data.complement,
+        district: data.district,
+        fone: data.fone,
+        number: data.number,
+        state: data.state,
+        street: data.street,
+        type: data.type,
+        zip: data.zip,
+      })
 
-    createNewAddress(data)
-    await router.push('/my-account/address')
+      await router.push('/my-account/address')
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   async function handleGetCepAddress(cep: string) {
@@ -126,7 +152,7 @@ export default function NewAddress() {
   return (
     <>
       <Head>
-        <title>Cadastrar Endereço | Shoppi</title>
+        <title>Cadastrar endereço | Shoppi</title>
       </Head>
 
       <Container>
@@ -287,18 +313,6 @@ export default function NewAddress() {
               }}
             />
           </InputContainer>
-
-          <Controller
-            control={control}
-            name="isCurrentAddress"
-            render={({ field }) => {
-              return (
-                <Checkbox onCheckedChange={field.onChange} id="main-address">
-                  Salvar como endereço padrão
-                </Checkbox>
-              )
-            }}
-          />
 
           {isSubmitting ? (
             <ButtonCreateNewAddress disabled={isSubmitting} type="submit">

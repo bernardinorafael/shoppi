@@ -1,13 +1,13 @@
 import { Item, Sub, SubTrigger } from '@radix-ui/react-dropdown-menu'
 import Link from 'next/link'
-import { Bag, CaretRight, MapPinLine, UserCircle } from 'phosphor-react'
+import { Bag, CaretRight, MapPinLine } from 'phosphor-react'
 import SubMenuAddress from './components/SubMenuAddress'
 import {
-  Container,
-  DropdownItem,
-  DropdownSubTrigger,
-  LoginLinkButton,
-  NavigationContainer,
+	Container,
+	DropdownItem,
+	DropdownSubTrigger,
+	LoginLinkButton,
+	NavigationContainer
 } from './styles'
 
 export default function DropdownMenuProfile() {
@@ -15,7 +15,7 @@ export default function DropdownMenuProfile() {
     <Container align="end">
       <div>
         <Item asChild>
-          <LoginLinkButton href="/login">Entrar</LoginLinkButton>
+          <LoginLinkButton href="/login-page">Entrar</LoginLinkButton>
         </Item>
       </div>
 
@@ -28,18 +28,10 @@ export default function DropdownMenuProfile() {
               <CaretRight weight="bold" size={16} />
             </DropdownSubTrigger>
           </SubTrigger>
-
           <SubMenuAddress />
         </Sub>
 
-        <Link href="/my-account">
-          <DropdownItem>
-            <UserCircle weight="regular" size={24} />
-            Meu perfil
-          </DropdownItem>
-        </Link>
-
-        <Link href="#">
+        <Link href="login-page">
           <DropdownItem>
             <Bag weight="regular" size={24} />
             Meus pedidos

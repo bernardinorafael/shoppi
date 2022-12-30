@@ -6,11 +6,19 @@ export const Container = styled.div`
   gap: 1rem;
   padding: 1rem;
 
-  > div:first-child {
+  > a:first-child {
     aspect-ratio: 1 / 1;
-    background-color: #121216;
-    height: 4rem;
+    height: 3rem;
     position: relative;
+
+    img {
+      border-radius: 8px;
+      border: 1px solid ${({ theme }) => theme.COLORS.primary['600']};
+
+      &:active {
+        transform: scale(1.04);
+      }
+    }
   }
 `
 
@@ -35,10 +43,15 @@ export const ProductBox = styled.div`
     > div:first-child {
       display: flex;
       flex-direction: column;
+
+      span {
+        text-transform: uppercase;
+      }
     }
 
     > div:last-child {
       align-items: flex-end;
+      gap: 0.225rem;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;

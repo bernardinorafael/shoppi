@@ -29,12 +29,12 @@ export const GlobalStyle = createGlobalStyle`
 	}
 	
 	::-webkit-scrollbar {
-		width: .5rem;
-		background: ${({ theme }) => theme.COLORS.primary[700]};
+		width: .875rem;
+		background: ${({ theme }) => theme.COLORS.primary[1000]};
 	}
 
 	::-webkit-scrollbar-thumb {
-		background: ${(props) => props.theme.COLORS.primary[400]};
+		background: ${(props) => props.theme.COLORS.primary[500]};
 	}
 	
 	@media (max-width: 992px) {

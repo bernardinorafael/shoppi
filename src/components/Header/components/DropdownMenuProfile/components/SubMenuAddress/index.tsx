@@ -8,13 +8,13 @@ export default function SubMenuAddress() {
     <Portal>
       <DropdownSubContent sideOffset={-10}>
         <div>
-          <Link href="/my-account/address">
+          <Link href="/address">
             <DropdownItem>
               <PencilLine weight="regular" size={24} />
               Editar endereços
             </DropdownItem>
           </Link>
-          <Link href="/my-account/address/new-address">
+          <Link href="/address/new-address">
             <DropdownItem>
               <UserList weight="regular" size={24} />
               Criar novo endereço

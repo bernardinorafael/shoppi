@@ -3,80 +3,32 @@ import styled from 'styled-components'
 export const Container = styled.header`
   align-items: center;
   background-color: ${({ theme }) => theme.COLORS.primary[1000]};
+  border-bottom: 1px solid ${({ theme }) => theme.COLORS.primary[700]};
   display: flex;
   height: 4rem;
   width: 100%;
-  border-bottom: 1px solid ${({ theme }) => theme.COLORS.primary[700]};
   z-index: 110;
 
   section {
     align-items: center;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     margin: 0 auto;
     max-width: 1440px;
     padding: 0 1.5rem;
     width: 100%;
 
-    a {
-      font-family: ${({ theme }) => theme.FONT_FAMILY.cursive};
-      font-size: 2.25rem;
-      letter-spacing: -3px;
-      text-decoration: underline;
-      user-select: none;
-    }
-
     > div:first-child {
       display: flex;
-      gap: 5rem;
-      flex: 1;
-    }
+      gap: 2rem;
+      justify-content: flex-start;
 
-    nav {
-      display: flex;
-      flex: 1;
-      gap: 0.5rem;
-      justify-content: center;
-      align-items: center;
-
-      a {
-        background-color: transparent;
-        border: 1px solid transparent;
-        font-family: ${({ theme }) => theme.FONT_FAMILY.sans};
-        font-size: 0.875rem;
-        font-weight: 600;
-        text-decoration: none;
-        letter-spacing: 0;
-        padding: 0.225rem 0.5rem;
-        position: relative;
-
-        &:last-child {
-          font-weight: 700;
-          color: ${({ theme }) => theme.COLORS.red[200]};
-
-          &::after {
-            background-color: ${({ theme }) => theme.COLORS.red[200]};
-          }
-        }
-
-        &:hover::after {
-          opacity: 1;
-          transition: all 200ms;
-          transform: translateY(0);
-        }
-
-        &::after {
-          background-color: ${({ theme }) => theme.COLORS.primary[200]};
-          bottom: -4px;
-          content: '';
-          height: 2px;
-          pointer-events: none;
-          transform: translateY(8px);
-          left: 0;
-          opacity: 0;
-          position: absolute;
-          width: 100%;
-        }
+      > a {
+        font-family: ${({ theme }) => theme.FONT_FAMILY.cursive};
+        font-size: 2.5rem;
+        letter-spacing: -3px;
+        text-decoration: underline;
+        user-select: none;
       }
     }
 
@@ -88,6 +40,53 @@ export const Container = styled.header`
       svg {
         color: ${({ theme }) => theme.COLORS.primary[100]};
       }
+    }
+  }
+`
+
+export const NavbarBox = styled.nav`
+  align-items: center;
+  display: flex;
+  flex: 1;
+  gap: 0.5rem;
+  justify-content: center;
+
+  a {
+    background-color: transparent;
+    border: 1px solid transparent;
+    font-family: ${({ theme }) => theme.FONT_FAMILY.sans};
+    font-weight: 600;
+    letter-spacing: 0;
+    padding: 0.225rem 0.5rem;
+    position: relative;
+    text-decoration: none;
+
+    &:last-child {
+      color: ${({ theme }) => theme.COLORS.red[200]};
+      font-weight: 700;
+
+      &::after {
+        background-color: ${({ theme }) => theme.COLORS.red[200]};
+      }
+    }
+
+    &:hover::after {
+      opacity: 1;
+      transform: translateY(0);
+      transition: all 200ms;
+    }
+
+    &::after {
+      background-color: ${({ theme }) => theme.COLORS.primary[200]};
+      bottom: -4px;
+      content: '';
+      height: 2px;
+      left: 0;
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      transform: translateY(8px);
+      width: 100%;
     }
   }
 `
@@ -115,55 +114,6 @@ export const ButtonNavbar = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-`
-
-export const SearchFormContainer = styled.form`
-  align-items: center;
-  background-color: ${({ theme }) => theme.COLORS.primary[1200]};
-  border: 1px solid ${({ theme }) => theme.COLORS.primary[900]};
-  display: flex;
-  height: 2.5rem;
-  justify-content: space-between;
-  border-radius: 6px;
-  max-width: 500px;
-  padding-left: 1rem;
-  width: 100%;
-
-  svg {
-    color: ${({ theme }) => theme.COLORS.primary[100]};
-  }
-
-  input {
-    background-color: transparent;
-    border: none;
-    color: ${({ theme }) => theme.COLORS.primary[100]};
-    flex: 1;
-    font-size: 1rem;
-    font-weight: 600;
-    height: 2rem;
-    outline: none;
-
-    &::placeholder {
-      color: ${({ theme }) => theme.COLORS.primary[400]};
-    }
-
-    &:focus {
-      box-shadow: none;
-    }
-  }
-`
-
-export const SearchButton = styled.button`
-  background: transparent;
-  border-radius: 1px;
-  border: none;
-  height: inherit;
-  outline: none;
-  padding: 0 1rem;
-
-  svg {
-    color: ${({ theme }) => theme.COLORS.primary[400]};
   }
 `
 

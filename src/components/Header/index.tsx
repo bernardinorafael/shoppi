@@ -1,84 +1,45 @@
 import * as Dialog from '@radix-ui/react-dialog'
+import { useSession } from 'next-auth/react'
 import Link from 'next/link'
-import {
-  CaretDown,
-  HeartStraight,
-  MagnifyingGlass,
-  ShoppingCart,
-} from 'phosphor-react'
-import React from 'react'
+import { CaretDown, ShoppingCart } from 'phosphor-react'
+import { useShoppingCart } from 'use-shopping-cart'
 import DropdownMenu from '../../primitives/DropdownMenu'
-import Popover from '../../primitives/Popover'
-import Tooltip from '../../primitives/Tooltip'
 import DialogCartContent from './components/DialogCartContent'
 import DropdownMenuProfile from './components/DropdownMenuProfile'
-import PopoverNavigateContent from './components/PopoverNavigateContent'
-import PopoverWishListContent from './components/PopoverWishListContent'
-import {
-  ButtonMyProfile,
-  ButtonNavbar,
-  Container,
-  SearchButton,
-  SearchFormContainer,
-} from './styles'
-import { useShoppingCart } from 'use-shopping-cart'
+import DropdownLoggedUser from './components/DropdownMenuProfile/DropdownLoggedUser'
+import { ButtonMyProfile, ButtonNavbar, Container, NavbarBox } from './styles'
 
 export default function Header() {
-  const [isCartDialogOpen, setIsCartDialogOpen] = React.useState(false)
+  const { status } = useSession()
   const { cartCount } = useShoppingCart()
 
-  function onCloseCartDialog() {
-    setIsCartDialogOpen(!isCartDialogOpen)
-  }
+  const isButtonCartDisable = cartCount <= 0
+  const isUserAuthenticated = status === 'authenticated'
 
   return (
     <Container>
       <section>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div>
           <Link href="/">Shoppi</Link>
-
-          <SearchFormContainer>
-            <Popover
-              side="bottom"
-              align="center"
-              onOpenAutoFocus
-              sideOffset={10}
-              render={<PopoverNavigateContent />}
-            >
-              <input placeholder="Procurar produtos e marcas" type="text" />
-            </Popover>
-
-            <Tooltip render="Procurar">
-              <SearchButton type="button">
-                <MagnifyingGlass size={24} />
-              </SearchButton>
-            </Tooltip>
-          </SearchFormContainer>
         </div>
 
-        <nav>
-          <Link href="/">Homens</Link>
-          <Link href="/">Mulheres</Link>
-          <Link href="/">Promoções</Link>
+        <NavbarBox>
+          <Link href="/adidas">Adidas</Link>
+          <Link href="/converse">Converse</Link>
+          <Link href="/puma">Puma</Link>
           <Link href="/special">Especial</Link>
-        </nav>
+        </NavbarBox>
 
         <div>
-          <Popover align="center" render={<PopoverWishListContent />}>
-            <ButtonNavbar>
-              <HeartStraight size={28} weight="regular" />
-            </ButtonNavbar>
-          </Popover>
-
-          <Dialog.Root open={isCartDialogOpen} onOpenChange={onCloseCartDialog}>
+          <Dialog.Root>
             <Dialog.Trigger asChild>
-              <ButtonNavbar>
+              <ButtonNavbar disabled={isButtonCartDisable}>
                 <ShoppingCart size={28} weight="regular" />
                 {cartCount > 0 && <div>{cartCount}</div>}
               </ButtonNavbar>
             </Dialog.Trigger>
 
-            <DialogCartContent onCloseCartDialog={onCloseCartDialog} />
+            <DialogCartContent />
           </Dialog.Root>
 
           <DropdownMenu
@@ -90,7 +51,11 @@ export default function Header() {
               </ButtonMyProfile>
             }
           >
-            <DropdownMenuProfile />
+            {!isUserAuthenticated ? (
+              <DropdownMenuProfile />
+            ) : (
+              <DropdownLoggedUser />
+            )}
           </DropdownMenu>
         </div>
       </section>

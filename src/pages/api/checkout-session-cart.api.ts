@@ -7,7 +7,7 @@ export default async function handler(
 ) {
   if (req.method !== 'POST') return res.status(405).end()
 
-  const { cartProducts } = req.body
+  const { cartProducts, email } = req.body
   const lineItemProducts = cartProducts.map((product) => {
     return {
       price: product.price_id,
@@ -16,7 +16,7 @@ export default async function handler(
   })
 
   const CANCEL_URL = `${process.env.NEXT_WEBSITE_URL}/`
-  const SUCCESS_URL = `${process.env.NEXT_WEBSITE_URL}/`
+  const SUCCESS_URL = `${process.env.NEXT_WEBSITE_URL}/success-purchase?session_id={CHECKOUT_SESSION_ID}`
 
   const checkoutSession = await stripe.checkout.sessions.create({
     cancel_url: CANCEL_URL,
@@ -24,6 +24,8 @@ export default async function handler(
     mode: 'payment',
     payment_method_types: ['boleto', 'card'],
     phone_number_collection: { enabled: false },
+    customer_email: email,
+    currency: 'BRL',
     line_items: lineItemProducts,
     locale: 'pt-BR',
   })

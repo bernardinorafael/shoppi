@@ -14,13 +14,17 @@ export const RadioGroupItem = styled(RadioGroup.Item)`
   cursor: default;
   height: 4rem;
   aspect-ratio: 1 / 1;
-  margin-bottom: 2rem;
   outline: none;
   font-size: 1rem;
   font-weight: 600;
   text-transform: uppercase;
 
-  &:hover {
+  &:disabled {
+    opacity: 0.8;
+    cursor: not-allowed;
+  }
+
+  &:not(:disabled):hover {
     border: 1px solid ${({ theme }) => theme.COLORS.primary[200]};
   }
 
@@ -169,6 +173,11 @@ export const SizeContainer = styled.section`
   flex-direction: column;
   margin-top: 1rem;
   width: 100%;
+
+  > span {
+    margin: 0.5rem 0 2rem;
+    font-weight: 600;
+  }
 
   > div:first-child {
     align-items: center;

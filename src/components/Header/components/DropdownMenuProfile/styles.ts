@@ -18,13 +18,11 @@ export const DropdownItem = styled(Dropdown.Item)`
   align-items: center;
   display: flex;
   font-weight: 500;
-  width: 100%;
   height: 100%;
   gap: 0.5rem;
   padding: 0.225rem 1rem;
   position: relative;
   border-radius: 6px;
-  padding: 0.5rem;
 
   svg:nth-child(2) {
     position: absolute;
@@ -41,13 +39,11 @@ export const DropdownSubTrigger = styled(Dropdown.SubTrigger)`
   align-items: center;
   display: flex;
   font-weight: 500;
-  width: 100%;
   height: 100%;
   gap: 0.5rem;
   padding: 0.225rem 1rem;
   position: relative;
   border-radius: 6px;
-  padding: 0.5rem;
 
   &:hover {
     background-color: ${({ theme }) => theme.COLORS.primary[700]};
@@ -72,7 +68,8 @@ export const Container = styled(Dropdown.Content)`
   background-color: ${({ theme }) => theme.COLORS.primary[1000]};
   border-radius: 6px;
   border: 1px solid ${({ theme }) => theme.COLORS.primary[900]};
-  box-shadow: rgba(0, 0, 0, 0.25) 8px 10px 20px -5px, rgba(0, 0, 0, 0.1) 0px 8px 16px -8px;
+  box-shadow: rgba(0, 0, 0, 0.25) 8px 10px 20px -5px,
+    rgba(0, 0, 0, 0.1) 0px 8px 16px -8px;
   display: flex;
   flex-direction: column;
   max-height: 85vh;
@@ -85,22 +82,22 @@ export const Container = styled(Dropdown.Content)`
 
   > div:first-child {
     border-bottom: 1px solid ${({ theme }) => theme.COLORS.primary[900]};
-    display: grid;
+    display: flex;
     gap: 1rem;
-    grid-template-columns: 1fr;
-    padding: 0.5rem;
   }
 `
 
 export const LoginLinkButton = styled(Link)`
   align-items: center;
   background-color: transparent;
-  border: 1px solid ${({ theme }) => theme.COLORS.primary[800]};
+  border: 1px solid ${({ theme }) => theme.COLORS.primary['800']};
   display: flex;
+  width: 100%;
   font-weight: 600;
   justify-content: center;
+  padding: 0.5rem 0;
   font-size: 1rem;
-  padding: 0.5rem;
+  margin: 0.5rem 0;
   border-radius: 6px;
 
   &:active {

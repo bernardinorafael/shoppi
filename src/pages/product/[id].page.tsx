@@ -1,18 +1,21 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import axios from 'axios'
-import 'keen-slider/keen-slider.min.css'
+import 'keen-slider/kefen-slider.min.css'
 import { GetStaticPaths, GetStaticProps } from 'next'
+import { useSession } from 'next-auth/react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { CaretRight, CircleNotch, Minus, Plus, Ruler } from 'phosphor-react'
 import { FormEvent, useState } from 'react'
 import Stripe from 'stripe'
+import { useShoppingCart } from 'use-shopping-cart'
 import DialogImageProduct from '../../components/DialogImageProduct'
 import HeaderInternalPageNavigation from '../../components/HeaderInternalPageNavigation'
 import SizeGuideContent from '../../components/SizeGuideContent'
-import useAddressContext from '../../contexts/AddressContext'
 import useGlobalContext from '../../contexts/GlobalContext'
+import { ConvertDiscount } from '../../helpers/convert-discount'
 import { stripe } from '../../services/stripe'
 import {
   AddressContainer,
@@ -28,9 +31,6 @@ import {
   RadioGroupRoot,
   SizeContainer,
 } from './styles'
-import { ConvertDiscount } from '../../helpers/convert-discount'
-import { useShoppingCart } from 'use-shopping-cart'
-import { useRouter } from 'next/router'
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
@@ -62,7 +62,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       },
     },
 
-    revalidate: 60 * 60 * 24, // 24h
+    revalidate: 60 * 60 * 24,
   }
 }
 
@@ -81,20 +81,28 @@ type ProductProps = {
 }
 
 export default function Product({ product }: ProductProps) {
-  const [quantityProduct, setQuantityProduct] = useState(1)
-  const { addresses } = useAddressContext()
-  const { formatCurrency } = useGlobalContext()
-  const [isCreatingCheckout, setIsCreatingCheckout] = useState(false)
   const router = useRouter()
+  const { formatCurrency } = useGlobalContext()
   const { addItem, cartDetails } = useShoppingCart()
+  const session = useSession()
+  const [quantityProduct, setQuantityProduct] = useState(1)
+  const [isCreatingCheckout, setIsCreatingCheckout] = useState(false)
+  const [productSize, setProductSize] = useState('')
+
+  const isUserAuthenticated = session.status === 'authenticated'
 
   async function handleBuyUniqueProduct() {
+    if (!isUserAuthenticated) {
+      return router.push('/login-page')
+    }
+
     try {
       setIsCreatingCheckout(true)
 
       const response = await axios.post('/api/checkout-session', {
         priceId: product.defaultPriceId,
         quantity: quantityProduct,
+        email: session.data.user.email,
       })
 
       const { checkoutUrl } = response.data
@@ -126,6 +134,7 @@ export default function Product({ product }: ProductProps) {
       price: product.price,
       price_id: product.defaultPriceId,
       quantity: quantityProduct,
+      size: productSize,
     })
   }
 
@@ -214,15 +223,24 @@ export default function Product({ product }: ProductProps) {
               </Dialog.Root>
             </div>
 
-            <RadioGroupRoot>
+            <RadioGroupRoot onValueChange={setProductSize}>
               {product.size.split(',').map((product, i) => {
                 return (
-                  <RadioGroupItem value={product} key={i}>
+                  <RadioGroupItem
+                    key={i}
+                    value={product}
+                    disabled={!!isProductAlreadyInCart}
+                  >
                     {product}
                   </RadioGroupItem>
                 )
               })}
             </RadioGroupRoot>
+            {isProductAlreadyInCart ? (
+              <span>Altere o tamanho no carrinho</span>
+            ) : (
+              <span></span>
+            )}
           </SizeContainer>
 
           <QuantityBox>
@@ -253,15 +271,7 @@ export default function Product({ product }: ProductProps) {
             <div>
               <strong>Endereço de entrega</strong>
 
-              <span>
-                {`
-									${addresses[0].client} - 
-									${addresses[0].street}, 
-									${addresses[0].number} - 
-									${addresses[0].district}
-									${addresses[0].state}
-								`}
-              </span>
+              <span></span>
             </div>
             <Link href="#">Ver meus endereços</Link>
           </AddressContainer>
@@ -282,9 +292,9 @@ export default function Product({ product }: ProductProps) {
             )}
             {isProductAlreadyInCart ? (
               <button
-                disabled={!!isProductAlreadyInCart}
                 type="submit"
                 onClick={handleAddToCart}
+                disabled={!!isProductAlreadyInCart}
               >
                 Adicionado ao carrinho
               </button>

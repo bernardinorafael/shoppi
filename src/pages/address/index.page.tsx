@@ -1,26 +1,65 @@
+import { GetServerSideProps } from 'next'
+import { unstable_getServerSession } from 'next-auth'
+import Head from 'next/head'
 import Link from 'next/link'
-import { CaretRight, House, Pen, SuitcaseSimple, TrashSimple } from 'phosphor-react'
-import HeaderInternalPageNavigation from '../../../components/HeaderInternalPageNavigation'
+import {
+  CaretRight,
+  House,
+  Pen,
+  SuitcaseSimple,
+  TrashSimple,
+} from 'phosphor-react'
+import HeaderInternalPageNavigation from '../../components/HeaderInternalPageNavigation'
+import Tooltip from '../../primitives/Tooltip'
+import { prisma } from '../../services/prisma'
+import { authOptions } from '../api/auth/[...nextauth].api'
 import {
   AddressContainer,
-  ButtonAction,
   AddressContent,
+  ButtonAction,
   ButtonNewAddress,
   Container,
   Content,
 } from './styles'
-import Head from 'next/head'
-import useAddressContext from '../../../contexts/AddressContext'
-import Tooltip from '../../../primitives/Tooltip'
 
-export default function Address() {
-  const { addresses, deleteAddress } = useAddressContext()
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const session = await unstable_getServerSession(req, res, authOptions)
 
-  async function handleDeleteAddress(id: string) {
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    deleteAddress(id)
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/login-page',
+        permanent: false,
+      },
+    }
   }
 
+  const addresses = await prisma.address.findMany()
+
+  return {
+    props: {
+      addresses,
+    },
+  }
+}
+
+type Addresses = {
+  addresses: {
+    city: string
+    client: string
+    complement: string
+    district: string
+    fone: string
+    number: string
+    state: string
+    street: string
+    type: 'work' | 'house'
+    zip: string
+    id: string
+  }[]
+}
+
+export default function Address({ addresses }: Addresses) {
   return (
     <>
       <Head>
@@ -30,8 +69,6 @@ export default function Address() {
       <Container>
         <HeaderInternalPageNavigation current="Endereços">
           <Link href="/">Início</Link>
-          <CaretRight />
-          <Link href="/my-account">Minha conta</Link>
           <CaretRight />
         </HeaderInternalPageNavigation>
 
@@ -85,7 +122,7 @@ export default function Address() {
                     </Tooltip>
 
                     <Tooltip side="left" render="Excluir">
-                      <ButtonAction onClick={() => handleDeleteAddress(address.id)}>
+                      <ButtonAction>
                         <TrashSimple size={20} weight="bold" />
                       </ButtonAction>
                     </Tooltip>

@@ -11,6 +11,7 @@
 - ☑️ Listagem de produtos.
 - ☑️ Compra de um único produto escolhendo a quantidade.
 - ☑️ Adição de itens ao carrinho e após isso fazer checkout.
+- ☑️ Integração com método de pagamentos.
 
 
 # Tecnologias
