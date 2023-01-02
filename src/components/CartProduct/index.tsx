@@ -2,52 +2,45 @@ import Image from 'next/image'
 import Link from 'next/link'
 import useGlobalContext from '../../contexts/GlobalContext'
 import ControlQuantityButton from './components/ControlQuantityButton'
+import SizeSelect from './components/SizeSelect'
 import { Container, ProductBox, QuantityBox } from './styles'
 
 type CardProductProps = {
-  price: number
-  name: string
-  quantity: number
   imageUrl: string
+  name: string
+  price: number
   productId: string
-  value: number
+  quantity: number
   size: string
+  sizes: string
+  value: number
 }
 
-export default function CartProduct({
-  imageUrl,
-  name,
-  price,
-  value,
-  quantity,
-  productId,
-  size,
-}: CardProductProps) {
+export default function CartProduct(props: CardProductProps) {
   const { formatCurrency } = useGlobalContext()
 
   return (
     <Container>
-      <Link href={`/product/${productId}`}>
-        <Image src={imageUrl} alt="" fill />
+      <Link href={`/product/${props.productId}`}>
+        <Image src={props.imageUrl} alt="" fill />
       </Link>
 
       <ProductBox>
-        <strong>{name}</strong>
+        <Link href={`/product/${props.productId}`}>{props.name}</Link>
 
         <section>
           <div>
-            <span>
-              Tamanho: <strong>{size}</strong>
-            </span>
+            <SizeSelect sizes={props.sizes} defaultSize={props.size} />
+
             <QuantityBox>
-              <strong>{quantity} un.</strong>
-              <ControlQuantityButton productId={productId} />
+              <strong>{props.quantity} un.</strong>
+              <ControlQuantityButton productId={props.productId} />
             </QuantityBox>
           </div>
 
           <div>
-            <span>{formatCurrency.format(price)} /un</span>
-            <span>{formatCurrency.format(value)}</span>
+            <span>{formatCurrency.format(props.price)} /un</span>
+            <span>{formatCurrency.format(props.value)}</span>
           </div>
         </section>
       </ProductBox>
