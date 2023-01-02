@@ -3,7 +3,7 @@ import { prisma } from '../../../services/prisma'
 import { unstable_getServerSession } from 'next-auth'
 import { authOptions } from '../auth/[...nextauth].api'
 
-type AddressBody = {
+type Body = {
   city: string
   client: string
   complement: string
@@ -14,6 +14,7 @@ type AddressBody = {
   street: string
   type: 'work' | 'house'
   zip: string
+  addressId: string
 }
 
 export default async function handler(
@@ -28,9 +29,13 @@ export default async function handler(
     return res.status(401).end()
   }
 
-  const address: AddressBody = req.body
+  const address: Body = req.body
 
-  const response = await prisma.address.create({
+  await prisma.address.update({
+    where: {
+      id: address.addressId,
+    },
+
     data: {
       city: address.city,
       client: address.client,
@@ -42,9 +47,8 @@ export default async function handler(
       street: address.street,
       type: address.type,
       zip: address.zip,
-      userId: session.user.id,
     },
   })
 
-  return res.status(201).json({ response })
+  return res.status(201).end()
 }

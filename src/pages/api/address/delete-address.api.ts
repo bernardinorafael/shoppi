@@ -1,5 +1,6 @@
 import { NextApiResponse, NextApiRequest } from 'next'
 import { unstable_getServerSession } from 'next-auth'
+import { prisma } from '../../../services/prisma'
 import { authOptions } from '../auth/[...nextauth].api'
 
 export default async function handler(
@@ -14,7 +15,11 @@ export default async function handler(
     return res.status(401).end()
   }
 
-	
-	
-  return res.status(201).json({})
+  const { productId } = req.body
+
+  await prisma.address.delete({
+    where: { id: productId },
+  })
+
+  return res.status(201).end()
 }
