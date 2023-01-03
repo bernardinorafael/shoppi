@@ -18,6 +18,7 @@ import {
   REGEX_CEP_VALIDATION,
   REGEX_FONE_VALIDATION,
 } from '../../../helpers/regex'
+import { prisma } from '../../../services/prisma'
 import { authOptions } from '../../api/auth/[...nextauth].api'
 import {
   ButtonCreateNewAddress,
@@ -28,9 +29,12 @@ import {
   InputDisabled,
   RadioItem,
   RadioRoot,
-} from './styles'
+} from '../new-address/styles'
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+export const getServerSideProps: GetServerSideProps<
+  any,
+  { address_id: string }
+> = async ({ req, res, params }) => {
   const session = await unstable_getServerSession(req, res, authOptions)
 
   if (!session) {
@@ -42,17 +46,17 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     }
   }
 
-  return {
-    props: {},
-  }
-}
+  const addressId = params.address_id
 
-type AddressResponse = {
-  bairro: string
-  cep: string
-  localidade: string
-  logradouro: string
-  uf: string
+  const address = await prisma.address.findUnique({
+    where: {
+      id: addressId,
+    },
+  })
+
+  return {
+    props: { address },
+  }
 }
 
 const newAddressValidationSchema = z.object({
@@ -82,45 +86,51 @@ const newAddressValidationSchema = z.object({
 
 type NewAddressForm = z.infer<typeof newAddressValidationSchema>
 
-export default function NewAddress() {
-  const router = useRouter()
+type AddressResponse = {
+  bairro: string
+  cep: string
+  localidade: string
+  logradouro: string
+  uf: string
+}
+
+type EditAddressProps = {
+  address: {
+    city: string
+    client: string
+    complement: string
+    district: string
+    fone: string
+    id: string
+    number: string
+    state: string
+    street: string
+    type: 'work' | 'house'
+    userId?: string
+    zip: string
+  }
+}
+
+export default function EditAddress({ address }: EditAddressProps) {
   const {
     control,
-    handleSubmit,
     register,
     setFocus,
     setValue,
     watch,
+    handleSubmit,
     formState: { isSubmitting, errors },
   } = useForm<NewAddressForm>({
     resolver: zodResolver(newAddressValidationSchema),
+    defaultValues: {
+      type: address.type,
+    },
   })
 
-  async function handleCreateNewAddress(data: NewAddressForm) {
-    try {
-      await axios.post('/api/address/create-address', {
-        city: data.city,
-        client: data.client,
-        complement: data.complement,
-        district: data.district,
-        fone: data.fone,
-        number: data.number,
-        state: data.state,
-        street: data.street,
-        type: data.type,
-        zip: data.zip,
-      })
-
-      await router.push('/address')
-    } catch (err) {
-      console.error(err)
-    }
-  }
-
-  async function handleGetCepAddress(cep: string) {
+  async function handleGetCepAddress(zip: string) {
     try {
       const response = await axios.get<AddressResponse>(
-        `https://viacep.com.br/ws/${cep}/json/`,
+        `https://viacep.com.br/ws/${zip}/json/`,
       )
 
       setValue('city', response.data.localidade)
@@ -149,14 +159,39 @@ export default function NewAddress() {
     setValue('fone', normalizeFoneNumber(fone))
   }, [zip, number, fone, setValue])
 
+  const router = useRouter()
+
+  async function handleEditAddress(data: NewAddressForm) {
+    try {
+      await axios.post('/api/address/update-address', {
+        addressId: String(router.query.address_id),
+        city: data.city,
+        client: data.client,
+        complement: data.complement,
+        district: data.district,
+        fone: data.fone,
+        number: data.number,
+        state: data.state,
+        street: data.street,
+        type: data.type,
+        zip: data.zip,
+      })
+
+      await router.push('/address')
+    } catch (err) {
+      alert(err)
+      console.error(err)
+    }
+  }
+
   return (
     <>
       <Head>
-        <title>Cadastrar endereço | Shoppi</title>
+        <title>Editar endereço | Shoppi</title>
       </Head>
 
       <Container>
-        <HeaderInternalPageNavigation current="Novo endereço">
+        <HeaderInternalPageNavigation current={address.client}>
           <Link href="/">Início</Link>
           <CaretRight />
           <Link href="/address">Endereços</Link>
@@ -164,18 +199,19 @@ export default function NewAddress() {
         </HeaderInternalPageNavigation>
 
         <div>
-          <h1>Adicione um novo endereço</h1>
+          <h1>Edite seu endereço</h1>
           <p>Campos com * indicam obrigatório</p>
         </div>
 
-        <FormContainer onSubmit={handleSubmit(handleCreateNewAddress)}>
+        <FormContainer onSubmit={handleSubmit(handleEditAddress)}>
           <InputContainer>
             <label htmlFor="address-name">Nome completo*</label>
             <Input
+              defaultValue={address.client}
               error={!!errors.client}
               id="address-name"
-              type="text"
               placeholder="João da Silva"
+              type="text"
               {...register('client')}
             />
             <span>{errors.client?.message}</span>
@@ -186,9 +222,9 @@ export default function NewAddress() {
             <Input
               error={!!errors.fone}
               id="fone"
-              type="tel"
               maxLength={15}
               placeholder="(99) 99999-9999"
+              type="tel"
               {...register('fone')}
             />
             <span>{errors.fone?.message}</span>
@@ -199,9 +235,9 @@ export default function NewAddress() {
             <Input
               error={!!errors.zip}
               id="zip"
-              type="text"
               maxLength={9}
               placeholder="88915-000"
+              type="text"
               {...register('zip')}
               onBlur={() => handleGetCepAddress(zip)}
             />
@@ -211,13 +247,14 @@ export default function NewAddress() {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
               gap: '1rem',
+              gridTemplateColumns: '1fr 1fr',
             }}
           >
             <InputContainer>
               <label htmlFor="city'">Cidade*</label>
               <InputDisabled
+                defaultValue={address.city}
                 disabled
                 id="city'"
                 type="text"
@@ -228,6 +265,7 @@ export default function NewAddress() {
             <InputContainer>
               <label htmlFor="state">Estado*</label>
               <InputDisabled
+                defaultValue={address.state}
                 disabled
                 id="state"
                 type="text"
@@ -239,9 +277,10 @@ export default function NewAddress() {
           <InputContainer>
             <label htmlFor="street">Endereço*</label>
             <Input
+              defaultValue={address.street}
               error={!!errors.street}
-              placeholder="Rua 04 de novembro"
               id="street"
+              placeholder="Rua 04 de novembro"
               type="text"
               {...register('street')}
             />
@@ -251,11 +290,12 @@ export default function NewAddress() {
           <InputContainer>
             <label htmlFor="number">Número da residência*</label>
             <Input
+              defaultValue={address.number}
               error={!!errors.number}
-              placeholder="192 ou S/N"
               id="number"
-              type="text"
               maxLength={8}
+              placeholder="192 ou S/N"
+              type="text"
               {...register('number')}
             />
             <span>{errors.number?.message}</span>
@@ -264,9 +304,10 @@ export default function NewAddress() {
           <InputContainer>
             <label htmlFor="complement">Complemento</label>
             <Input
+              defaultValue={address.complement}
               error={!!errors.complement}
-              placeholder="Apartamento, casa, andar, etc..."
               id="complement"
+              placeholder="Apartamento, casa, andar, etc..."
               type="text"
               {...register('complement')}
             />
@@ -276,9 +317,10 @@ export default function NewAddress() {
           <InputContainer>
             <label htmlFor="district">Bairro*</label>
             <Input
+              defaultValue={address.district}
               error={!!errors.district}
-              placeholder="São Fagundes"
               id="district"
+              placeholder="São Fagundes"
               type="text"
               {...register('district')}
             />
@@ -294,6 +336,7 @@ export default function NewAddress() {
               render={({ field }) => {
                 return (
                   <RadioRoot
+                    defaultValue={address.type}
                     error={!!errors.type}
                     onValueChange={field.onChange}
                   >

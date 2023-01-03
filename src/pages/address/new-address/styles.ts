@@ -124,7 +124,6 @@ export const RadioItem = styled(Item)`
   border-radius: 2px;
   border: 1px solid ${({ theme }) => theme.COLORS.primary['500']};
   color: ${({ theme }) => theme.COLORS.primary['100']};
-  cursor: default;
   border-radius: 8px;
   display: flex;
   gap: 0.5rem;
@@ -154,18 +153,14 @@ export const RadioItem = styled(Item)`
 `
 
 export const ButtonCreateNewAddress = styled.button`
-  background-color: transparent;
-  border: 1px solid ${({ theme }) => theme.COLORS.primary[600]};
+  background-color: ${({ theme }) => theme.COLORS.primary['100']};
   font-size: 1rem;
   font-weight: 600;
   height: 3rem;
+  color: ${({ theme }) => theme.COLORS.primary['1200']};
   margin-top: 1rem;
   border-radius: 8px;
   position: relative;
-
-  &:active {
-    transform: scale(1.05);
-  }
 
   &:disabled {
     opacity: 0.8;
@@ -174,7 +169,6 @@ export const ButtonCreateNewAddress = styled.button`
 
   &:not(:disabled):hover {
     background-color: ${({ theme }) => theme.COLORS.secondary['700']};
-    color: ${({ theme }) => theme.COLORS.primary['1200']};
     transition: background-color 150ms, color 150ms;
   }
 

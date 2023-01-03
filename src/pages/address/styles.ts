@@ -29,6 +29,7 @@ export const ButtonNewAddress = styled(Link)`
   font-weight: 600;
   outline: none;
   padding: 0.5rem;
+  border-radius: 6px;
 
   &:hover {
     background-color: ${({ theme }) => theme.COLORS.primary['800']};
@@ -36,13 +37,25 @@ export const ButtonNewAddress = styled(Link)`
   }
 `
 
-export const AddressContainer = styled.div`
+export const AddressBox = styled.div`
   align-items: center;
   background-color: ${({ theme }) => theme.COLORS.primary['1200']};
+  border-radius: 8px;
   border: 1px solid ${({ theme }) => theme.COLORS.primary['600']};
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 1px 3px 0px;
   display: flex;
-  gap: 1rem;
-  padding: 1rem;
+  flex-direction: column;
+
+  section {
+    align-items: center;
+    display: flex;
+    width: 100%;
+
+    div:first-child {
+      align-self: baseline;
+      padding: 1rem;
+    }
+  }
 
   > div {
     height: 100%;
@@ -58,13 +71,14 @@ export const AddressContainer = styled.div`
   }
 `
 
-export const AddressContent = styled.div`
+export const AddressInformationBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   height: 100%;
   text-transform: capitalize;
   width: 100%;
+  padding: 1rem;
 
   strong {
     font-size: 1.5rem;
@@ -88,19 +102,29 @@ export const AddressContent = styled.div`
   }
 `
 
+export const ActionButtonsBox = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+  padding: 0.5rem;
+  width: 100%;
+  border-top: 1px solid ${(props) => props.theme.COLORS.primary['600']};
+  background-color: ${(props) => props.theme.COLORS.primary['800']};
+`
+
 export const ButtonAction = styled.button`
   align-items: center;
   background-color: transparent;
   border-radius: 4px;
   border: none;
-  cursor: default;
   display: flex;
   font-weight: 600;
   outline: none;
-  padding: 0.325rem;
+  gap: 0.225rem;
+  padding: 0.5rem;
 
   &:hover {
-    background-color: ${({ theme }) => theme.COLORS.primary['700']};
+    background-color: ${({ theme }) => theme.COLORS.primary['900']};
     transition: background-color 200ms;
   }
 `

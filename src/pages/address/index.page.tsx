@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { GetServerSideProps } from 'next'
 import { unstable_getServerSession } from 'next-auth'
 import Head from 'next/head'
@@ -10,16 +11,17 @@ import {
   TrashSimple,
 } from 'phosphor-react'
 import HeaderInternalPageNavigation from '../../components/HeaderInternalPageNavigation'
-import Tooltip from '../../primitives/Tooltip'
+import AlertDialog from '../../primitives/AlertDialog'
 import { prisma } from '../../services/prisma'
 import { authOptions } from '../api/auth/[...nextauth].api'
 import {
-  AddressContainer,
-  AddressContent,
+  ActionButtonsBox,
+  AddressBox,
+  AddressInformationBox,
   ButtonAction,
   ButtonNewAddress,
-  Container,
   Content,
+  Container,
 } from './styles'
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
@@ -60,6 +62,11 @@ type Addresses = {
 }
 
 export default function Address({ addresses }: Addresses) {
+  async function handleDeleteAddress(productId: string) {
+    await axios.post('/api/address/delete-address', { productId })
+    window.location.reload()
+  }
+
   return (
     <>
       <Head>
@@ -80,60 +87,64 @@ export default function Address({ addresses }: Addresses) {
           <Content>
             {addresses.map((address) => {
               return (
-                <AddressContainer key={address.id}>
-                  <div>
-                    {address.type === 'house' ? (
-                      <House size={36} weight="regular" />
-                    ) : (
-                      <SuitcaseSimple size={36} weight="regular" />
-                    )}
-                  </div>
+                <AddressBox key={address.id}>
+                  <section>
+                    <div>
+                      {address.type === 'house' ? (
+                        <House size={36} weight="regular" />
+                      ) : (
+                        <SuitcaseSimple size={36} weight="regular" />
+                      )}
+                    </div>
 
-                  <AddressContent>
-                    <Tooltip
-                      align="start"
-                      sideOffset={-5}
-                      render={`${address.street}, ${address.number} - ${address.city}/${address.state}`}
-                    >
+                    <AddressInformationBox>
                       <strong>
                         {address.street}, {address.number}
                       </strong>
-                    </Tooltip>
 
-                    <div>
-                      <span>CEP - {address.zip}</span>
-                      <span>
-                        {address.city} - {address.state}
-                      </span>
-                    </div>
+                      <div>
+                        <span>CEP - {address.zip}</span>
+                        <span>
+                          {address.city} - {address.state}
+                        </span>
+                      </div>
 
-                    <div>
-                      <span>
-                        {address.client} - {address.fone}
-                      </span>
-                    </div>
-                  </AddressContent>
+                      <div>
+                        <span>
+                          {address.client} - {address.fone}
+                        </span>
+                      </div>
+                    </AddressInformationBox>
+                  </section>
 
-                  <div>
-                    <Tooltip side="left" render="Editar">
+                  <ActionButtonsBox>
+                    <Link href={`/address/edit-address/${address.id}`}>
                       <ButtonAction>
-                        <Pen size={20} weight="bold" />
+                        <Pen size={18} weight="bold" />
+                        Editar
                       </ButtonAction>
-                    </Tooltip>
+                    </Link>
 
-                    <Tooltip side="left" render="Excluir">
+                    <AlertDialog
+                      action="Sim, excluir endereço"
+                      cancel="Cancelar"
+                      description="Essa ação não pode ser desfeita. Isso excluirá permanentemente seu endereço e removerá os dados de nossos servidores."
+                      title="Você tem certeza?"
+                      execute={() => handleDeleteAddress(address.id)}
+                    >
                       <ButtonAction>
-                        <TrashSimple size={20} weight="bold" />
+                        <TrashSimple size={18} weight="bold" />
+                        Excluir
                       </ButtonAction>
-                    </Tooltip>
-                  </div>
-                </AddressContainer>
+                    </AlertDialog>
+                  </ActionButtonsBox>
+                </AddressBox>
               )
             })}
           </Content>
         )}
 
-        <ButtonNewAddress href="/my-account/address/new-address">
+        <ButtonNewAddress href="/address/new-address">
           Adicionar novo endereço
         </ButtonNewAddress>
       </Container>
