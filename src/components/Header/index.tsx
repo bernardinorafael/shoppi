@@ -23,7 +23,9 @@ export default function Header() {
   const isButtonCartDisable = cartCount <= 0
   const isUserAuthenticated = status === 'authenticated'
 
-  const name = session.user.name.split(' ')[0]
+  // const name = session.user.name
+
+  console.log(name)
 
   return (
     <Container>
@@ -62,7 +64,7 @@ export default function Header() {
                     src={session.user.image}
                     width={20}
                   />
-                  <strong>{name}</strong>
+                  <strong>{session.user.name.split(' ')[0]}</strong>
                   <CaretDown size={16} weight="regular" />
                 </ButtonAvatarLogged>
               ) : (
