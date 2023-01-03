@@ -132,7 +132,7 @@ export const QuantityBox = styled.div`
   }
 `
 
-export const ProductDataContainer = styled.section`
+export const ProductDataContainer = styled.form`
   display: flex;
   flex-direction: column;
   max-height: 100%;
@@ -172,12 +172,8 @@ export const SizeContainer = styled.section`
   display: flex;
   flex-direction: column;
   margin-top: 1rem;
+  margin: 0.5rem 0 2rem;
   width: 100%;
-
-  > span {
-    margin: 0.5rem 0 2rem;
-    font-weight: 600;
-  }
 
   > div:first-child {
     align-items: center;

@@ -35,12 +35,31 @@ export const Container = styled.header`
     > div:last-child {
       align-items: center;
       display: flex;
-      gap: 0.125rem;
+      gap: 1rem;
 
       svg {
         color: ${({ theme }) => theme.COLORS.primary[100]};
       }
     }
+  }
+`
+
+export const ButtonAvatarLogged = styled.button`
+  all: unset;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  padding: 1rem 0;
+  gap: 0.5rem;
+
+  strong {
+    font-weight: 600;
+  }
+
+  img {
+    border-radius: 999px;
   }
 `
 
@@ -60,6 +79,7 @@ export const NavbarBox = styled.nav`
     padding: 0.225rem 0.5rem;
     position: relative;
     text-decoration: none;
+    font-size: 1rem;
 
     &:last-child {
       color: ${({ theme }) => theme.COLORS.red[200]};
@@ -104,11 +124,14 @@ export const ButtonNavbar = styled.button`
   > div {
     position: absolute;
     background-color: ${({ theme }) => theme.COLORS.red['200']};
-    top: 0;
-    right: 2px;
+    top: 5px;
+    font-weight: 600;
+    right: 5px;
     color: ${({ theme }) => theme.COLORS.primary['1200']};
-    font-size: 0.775rem;
-    height: 20px;
+    font-size: 0.725rem;
+    height: 18px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+      rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
     aspect-ratio: 1 / 1;
     border-radius: 100px;
     display: flex;
@@ -120,9 +143,10 @@ export const ButtonNavbar = styled.button`
 export const ButtonMyProfile = styled.button`
   align-items: center;
   background-color: transparent;
-  border-radius: 1px;
+  border-radius: 6px;
   border: 1px solid transparent;
   cursor: default;
+  cursor: pointer;
   display: flex;
   font-weight: 500;
   gap: 0.5rem;

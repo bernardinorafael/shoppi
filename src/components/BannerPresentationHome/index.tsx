@@ -3,7 +3,11 @@ import Image from 'next/image'
 import 'keen-slider/keen-slider.min.css'
 import { CaretLeft, CaretRight } from 'phosphor-react'
 import Link from 'next/link'
-import { ButtonCaretSlideLeft, ButtonCaretSlideRight, Container } from './styles'
+import {
+  ButtonCaretSlideLeft,
+  ButtonCaretSlideRight,
+  Container,
+} from './styles'
 import useGlobalContext from '../../contexts/GlobalContext'
 
 export default function BannerPresentationHome() {
@@ -52,7 +56,7 @@ export default function BannerPresentationHome() {
         slider.on('animationEnded', nextTimeout)
         slider.on('updated', nextTimeout)
       },
-    ]
+    ],
   )
 
   function handleNextSlide() {
@@ -66,7 +70,7 @@ export default function BannerPresentationHome() {
   return (
     <Container ref={sliderRef} className="keen-slider">
       <ButtonCaretSlideLeft onClick={handlePreviousSlide}>
-        <CaretLeft size={28} />
+        <CaretLeft weight="bold" size={32} />
       </ButtonCaretSlideLeft>
 
       <section className="keen-slider__slide">
@@ -109,7 +113,7 @@ export default function BannerPresentationHome() {
       </section>
 
       <ButtonCaretSlideRight onClick={handleNextSlide}>
-        <CaretRight size={28} />
+        <CaretRight weight="bold" size={32} />
       </ButtonCaretSlideRight>
     </Container>
   )

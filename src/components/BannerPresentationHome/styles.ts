@@ -77,6 +77,7 @@ export const ButtonCaretSlideLeft = styled(ButtonCaretSlide)`
   top: 50%;
   transform: translateY(-50%);
   z-index: 100;
+	border-radius: 8px;
 `
 
 export const ButtonCaretSlideRight = styled(ButtonCaretSlide)`
@@ -84,4 +85,5 @@ export const ButtonCaretSlideRight = styled(ButtonCaretSlide)`
   top: 50%;
   transform: translateY(-50%);
   z-index: 100;
+	border-radius: 8px;
 `

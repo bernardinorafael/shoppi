@@ -12,31 +12,27 @@ type ProductCardProps = {
 }
 
 export default function ProductCard({
-  price,
-  order,
-  name,
-  imageUrl,
-  id,
   promotion = 'false',
+  ...product
 }: ProductCardProps) {
   const { formatCurrency } = useGlobalContext()
 
   return (
-    <Container title={name} href={`/product/${id}`}>
+    <Container title={product.name} href={`/product/${product.id}`}>
       <div>
         <ImageInsideContainer>
           {promotion === 'true' ? <span>Promoção</span> : null}
-          {order ? <strong>{order}</strong> : null}
+          {product.order ? <strong>{product.order}</strong> : null}
         </ImageInsideContainer>
 
-        <Image src={imageUrl} alt="" fill />
+        <Image src={product.imageUrl} alt="" fill />
       </div>
 
       <div>
-        <strong>{name}</strong>
+        <strong>{product.name}</strong>
 
         <PricingContainer>
-          <strong>{formatCurrency.format(price)}</strong>
+          <strong>{formatCurrency.format(product.price)}</strong>
           <span>em 10x sem juros</span>
         </PricingContainer>
       </div>

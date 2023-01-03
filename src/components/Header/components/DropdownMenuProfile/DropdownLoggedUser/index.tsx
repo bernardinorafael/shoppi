@@ -4,17 +4,17 @@ import Link from 'next/link'
 import { Bag, CaretRight, MapPinLine, SignOut } from 'phosphor-react'
 import SubMenuAddress from '../components/SubMenuAddress'
 import {
-	Container,
-	DropdownItem,
-	DropdownSubTrigger,
-	NavigationContainer
+  Container,
+  DropdownItem,
+  DropdownSubTrigger,
+  NavigationContainer,
 } from '../styles'
 import {
-	AvatarBox,
-	AvatarFallback,
-	AvatarImage,
-	AvatarRoot,
-	LogoutBox
+  AvatarBox,
+  AvatarFallback,
+  AvatarImage,
+  AvatarRoot,
+  LogoutBox,
 } from './styles'
 
 export default function DropdownLoggedUser() {
@@ -24,14 +24,11 @@ export default function DropdownLoggedUser() {
     <Container align="end">
       <AvatarBox>
         <AvatarRoot>
-          <AvatarImage src={session.user.avatar_url} alt={session.user.name} />
+          <AvatarImage src={session.user.image} alt={session.user.name} />
           <AvatarFallback />
         </AvatarRoot>
 
-        <div>
-          <strong>{session.user.name}</strong>
-          <span>{session.user.email}</span>
-        </div>
+        <strong>{session.user.name}</strong>
       </AvatarBox>
 
       <NavigationContainer>
@@ -47,7 +44,7 @@ export default function DropdownLoggedUser() {
           <SubMenuAddress />
         </Sub>
 
-        <Link href="#">
+        <Link href="/my-purchases">
           <DropdownItem>
             <Bag weight="regular" size={24} />
             Meus pedidos

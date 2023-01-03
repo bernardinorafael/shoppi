@@ -2,7 +2,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import useGlobalContext from '../../contexts/GlobalContext'
 import ControlQuantityButton from './components/ControlQuantityButton'
-import SizeSelect from './components/SizeSelect'
 import { Container, ProductBox, QuantityBox } from './styles'
 
 type CardProductProps = {
@@ -11,8 +10,6 @@ type CardProductProps = {
   price: number
   productId: string
   quantity: number
-  size: string
-  sizes: string
   value: number
 }
 
@@ -30,8 +27,6 @@ export default function CartProduct(props: CardProductProps) {
 
         <section>
           <div>
-            <SizeSelect sizes={props.sizes} defaultSize={props.size} />
-
             <QuantityBox>
               <strong>{props.quantity} un.</strong>
               <ControlQuantityButton productId={props.productId} />

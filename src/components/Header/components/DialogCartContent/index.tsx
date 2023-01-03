@@ -5,6 +5,7 @@ import { CircleNotch, X } from 'phosphor-react'
 import {
   ButtonsContainer,
   CartContent,
+  CheckoutBox,
   CheckoutPriceContainer,
   DialogClose,
   DialogContent,
@@ -23,8 +24,9 @@ export default function DialogCartContent() {
   const { formatCurrency } = useGlobalContext()
   const { cartDetails, totalPrice, cartCount } = useShoppingCart()
   const session = useSession()
-  const cartProducts = Object.values(cartDetails ?? {})
   const router = useRouter()
+
+  const cartProducts = Object.values(cartDetails ?? {})
 
   const isUserAuthenticated = session.status === 'authenticated'
 
@@ -55,7 +57,7 @@ export default function DialogCartContent() {
 
       <DialogContent>
         <div>
-          <strong>{`Carrinho (${cartCount})`}</strong>
+          <strong>{`Meu carrinho (${cartCount})`}</strong>
 
           <DialogClose>
             <X weight="bold" size={26} />
@@ -73,40 +75,37 @@ export default function DialogCartContent() {
                 quantity={product.quantity}
                 imageUrl={product.image}
                 productId={product.id}
-                size={product.size}
               />
             )
           })}
         </CartContent>
 
-        <CheckoutPriceContainer>
-          <PriceTotalContainer>
-            <span>TOTAL</span>
+        <CheckoutBox>
+          <CheckoutPriceContainer>
+            <PriceTotalContainer>
+              <span>TOTAL</span>
 
-            <div>
-              <span>{formatCurrency.format(totalPrice)}</span>
-              <em>
-                em até 10x de R$ {`${formatCurrency.format(totalPrice / 10)}`}
-              </em>
-            </div>
-          </PriceTotalContainer>
-        </CheckoutPriceContainer>
-
-        <ButtonsContainer>
-          {isCreatingCheckout ? (
-            <button
-              disabled={isCreatingCheckout}
-              onClick={handleBuyProductsCart}
-            >
-              <CircleNotch size={20} weight="bold" />
-              Finalizar compra
-            </button>
-          ) : (
-            <button type="button" onClick={handleBuyProductsCart}>
-              Finalizar compra
-            </button>
-          )}
-        </ButtonsContainer>
+              <div>
+                <span>{formatCurrency.format(totalPrice)}</span>
+                <em>
+                  em até 10x de R$ {`${formatCurrency.format(totalPrice / 10)}`}
+                </em>
+              </div>
+            </PriceTotalContainer>
+          </CheckoutPriceContainer>
+          <ButtonsContainer>
+            {isCreatingCheckout ? (
+              <button disabled={isCreatingCheckout}>
+                <CircleNotch size={20} weight="bold" />
+                Finalizar compra
+              </button>
+            ) : (
+              <button type="button" onClick={handleBuyProductsCart}>
+                Finalizar compra
+              </button>
+            )}
+          </ButtonsContainer>
+        </CheckoutBox>
       </DialogContent>
     </Dialog.Portal>
   )

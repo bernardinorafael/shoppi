@@ -5,7 +5,7 @@ const nextConfig = {
   swcMinify: true,
   pageExtensions: ['page.tsx', 'api.ts', 'api.tsx'],
   compiler: { styledComponents: true },
-  images: { domains: ['files.stripe.com'] },
+  images: { domains: ['files.stripe.com', 'lh3.googleusercontent.com'] },
 }
 
 module.exports = nextConfig

@@ -5,6 +5,7 @@ export const Container = styled(Link)`
   padding: 0.875rem;
   border: 1px solid transparent;
   display: flex;
+	border-radius: 6px;
   flex-direction: column;
   overflow: hidden;
   user-select: none;

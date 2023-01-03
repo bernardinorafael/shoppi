@@ -68,6 +68,7 @@ export const ActionButton = styled(Action)`
   justify-content: center;
   border-radius: 6px;
   padding: 0 1rem;
+	cursor: pointer;
   font-size: 1rem;
   line-height: 0;
   font-weight: 600;
@@ -94,6 +95,7 @@ export const CancelButton = styled(Cancel)`
   justify-content: center;
   border-radius: 6px;
   padding: 0 1rem;
+	cursor: pointer;
   border: 1px solid ${(props) => props.theme.COLORS.primary['500']};
   font-size: 1rem;
   line-height: 0;

@@ -6,16 +6,16 @@ export const LogoutBox = styled.div`
   padding: 0.5rem 1rem;
 
   button {
-    background-color: transparent;
-    font-weight: 600;
-    padding: 0.225rem 0.5rem;
-    display: flex;
-    border: 1px solid ${({ theme }) => theme.COLORS.primary['700']};
-    border-radius: 6px;
-    outline: none;
     align-items: center;
-    justify-content: center;
+    background-color: transparent;
+    border-radius: 6px;
+    border: 1px solid ${({ theme }) => theme.COLORS.primary['700']};
+    display: flex;
+    font-weight: 600;
     gap: 0.225rem;
+    justify-content: center;
+    outline: none;
+    padding: 0.225rem 0.5rem;
 
     &:hover {
       border: 1px solid ${({ theme }) => theme.COLORS.primary['500']};
@@ -25,51 +25,42 @@ export const LogoutBox = styled.div`
 `
 
 export const AvatarBox = styled.div`
-  padding: 0.5rem;
-  display: flex;
   align-items: center;
+  display: flex;
+  padding: 0.5rem;
 
-  > div {
-    display: flex;
-    flex-direction: column;
-
-    strong {
-      font-size: 1rem;
-    }
-
-    span {
-      font-size: 0.775rem;
-    }
+  strong {
+    font-size: 1.25rem;
   }
 `
 
 export const AvatarRoot = styled(Avatar.Root)`
-  display: inline-flex;
   align-items: center;
+  border-radius: 100%;
+  display: inline-flex;
+  height: 40px;
   justify-content: center;
-  vertical-align: middle;
   overflow: hidden;
   user-select: none;
-  width: 50px;
-  height: 50px;
-  border-radius: 100%;
+  vertical-align: middle;
+  width: 40px;
 `
 
 export const AvatarImage = styled(Avatar.Image)`
-  width: 100%;
+  border-radius: inherit;
   height: 100%;
   object-fit: cover;
-  border-radius: inherit;
+  width: 100%;
 `
 
 export const AvatarFallback = styled(Avatar.Fallback)`
-  width: 100%;
-  height: 100%;
-  display: flex;
   align-items: center;
-  justify-content: center;
   color: var(--violet11);
+  display: flex;
   font-size: 1rem;
-  line-height: 1;
   font-weight: 600;
+  height: 100%;
+  justify-content: center;
+  line-height: 1;
+  width: 100%;
 `

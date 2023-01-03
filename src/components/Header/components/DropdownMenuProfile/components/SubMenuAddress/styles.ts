@@ -33,13 +33,13 @@ export const DropdownItem = styled(Item)`
   width: 100%;
   align-items: center;
   display: flex;
-  font-weight: 500;
+  font-weight: 600;
   width: 100%;
   height: 100%;
   gap: 0.5rem;
   padding: 0.225rem 1rem;
   position: relative;
-	border-radius: 6px;
+  border-radius: 6px;
 
   &[data-highlighted] {
     background-color: ${({ theme }) => theme.COLORS.primary[600]};

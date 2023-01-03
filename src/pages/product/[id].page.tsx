@@ -1,35 +1,30 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import axios from 'axios'
-import 'keen-slider/kefen-slider.min.css'
+import 'keen-slider/keen-slider.min.css'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { useSession } from 'next-auth/react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { CaretRight, CircleNotch, Minus, Plus, Ruler } from 'phosphor-react'
+import { CaretRight, CircleNotch, Minus, Plus } from 'phosphor-react'
 import { FormEvent, useState } from 'react'
 import Stripe from 'stripe'
 import { useShoppingCart } from 'use-shopping-cart'
 import DialogImageProduct from '../../components/DialogImageProduct'
 import HeaderInternalPageNavigation from '../../components/HeaderInternalPageNavigation'
-import SizeGuideContent from '../../components/SizeGuideContent'
 import useGlobalContext from '../../contexts/GlobalContext'
 import { ConvertDiscount } from '../../helpers/convert-discount'
 import { stripe } from '../../services/stripe'
 import {
-  AddressContainer,
-  ButtonCartContainer,
-  ImagesContainer,
-  NavigationContainer,
-  OfferContainer,
-  PriceContainer,
-  ProductContainer,
-  ProductDataContainer,
-  QuantityBox,
-  RadioGroupItem,
-  RadioGroupRoot,
-  SizeContainer,
+	ButtonCartContainer,
+	ImagesContainer,
+	NavigationContainer,
+	OfferContainer,
+	PriceContainer,
+	ProductContainer,
+	ProductDataContainer,
+	QuantityBox
 } from './styles'
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -39,8 +34,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const productId = String(params.id)
+export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
+  params,
+}) => {
+  const productId = params.id
 
   const product = await stripe.products.retrieve(productId, {
     expand: ['default_price'],
@@ -82,12 +79,11 @@ type ProductProps = {
 
 export default function Product({ product }: ProductProps) {
   const router = useRouter()
+  const session = useSession()
   const { formatCurrency } = useGlobalContext()
   const { addItem, cartDetails } = useShoppingCart()
-  const session = useSession()
   const [quantityProduct, setQuantityProduct] = useState(1)
   const [isCreatingCheckout, setIsCreatingCheckout] = useState(false)
-  const [productSize, setProductSize] = useState('')
 
   const isUserAuthenticated = session.status === 'authenticated'
 
@@ -119,7 +115,6 @@ export default function Product({ product }: ProductProps) {
 
   function handleDecrementProductQuantity() {
     if (quantityProduct === 1) return
-
     setQuantityProduct(quantityProduct - 1)
   }
 
@@ -134,11 +129,11 @@ export default function Product({ product }: ProductProps) {
       price: product.price,
       price_id: product.defaultPriceId,
       quantity: quantityProduct,
-      size: productSize,
     })
   }
 
   const isButtonQuantityProductDisabled = quantityProduct === 1
+
   const isProductAlreadyInCart = Object.values(cartDetails).find((item) => {
     return item.id === String(router.query.id)
   })
@@ -207,42 +202,6 @@ export default function Product({ product }: ProductProps) {
             </span>
           </PriceContainer>
 
-          <SizeContainer>
-            <div>
-              <span>Tamanhos disponíveis</span>
-
-              <Dialog.Root>
-                <Dialog.Trigger asChild>
-                  <button>
-                    Guia de tamanhos
-                    <Ruler size={20} />
-                  </button>
-                </Dialog.Trigger>
-
-                <SizeGuideContent />
-              </Dialog.Root>
-            </div>
-
-            <RadioGroupRoot onValueChange={setProductSize}>
-              {product.size.split(',').map((product, i) => {
-                return (
-                  <RadioGroupItem
-                    key={i}
-                    value={product}
-                    disabled={!!isProductAlreadyInCart}
-                  >
-                    {product}
-                  </RadioGroupItem>
-                )
-              })}
-            </RadioGroupRoot>
-            {isProductAlreadyInCart ? (
-              <span>Altere o tamanho no carrinho</span>
-            ) : (
-              <span></span>
-            )}
-          </SizeContainer>
-
           <QuantityBox>
             <span>Quantidade para compra rápida:</span>
 
@@ -267,15 +226,6 @@ export default function Product({ product }: ProductProps) {
             </div>
           </QuantityBox>
 
-          <AddressContainer>
-            <div>
-              <strong>Endereço de entrega</strong>
-
-              <span></span>
-            </div>
-            <Link href="#">Ver meus endereços</Link>
-          </AddressContainer>
-
           <ButtonCartContainer>
             {isCreatingCheckout ? (
               <button
@@ -291,11 +241,7 @@ export default function Product({ product }: ProductProps) {
               </button>
             )}
             {isProductAlreadyInCart ? (
-              <button
-                type="submit"
-                onClick={handleAddToCart}
-                disabled={!!isProductAlreadyInCart}
-              >
+              <button type="submit" disabled={!!isProductAlreadyInCart}>
                 Adicionado ao carrinho
               </button>
             ) : (

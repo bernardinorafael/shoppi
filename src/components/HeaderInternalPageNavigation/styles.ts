@@ -25,5 +25,6 @@ export const Container = styled.div`
     color: ${({ theme }) => theme.COLORS.amber[100]};
     font-size: 1rem;
     font-weight: 600;
+    text-transform: capitalize;
   }
 `

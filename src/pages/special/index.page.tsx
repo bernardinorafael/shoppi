@@ -5,7 +5,7 @@ import Stripe from 'stripe'
 import { Product } from '../../@types/product'
 import ProductCard from '../../components/ProductCard'
 import { GetStripeProducts } from '../../helpers/get-stripe-products'
-import { ProductsContainer, SpecialsContainer } from './styles'
+import { BannerBox, ProductsContainer, SpecialsContainer } from './styles'
 
 export const getStaticProps: GetStaticProps = async () => {
   const specialsResponse = await GetStripeProducts('special', 'true')
@@ -47,6 +47,16 @@ export default function Specials({ products }: SpecialsProps) {
         <section>
           <Image src="/converse/converse-banner-logo.png" alt="" fill />
         </section>
+
+        <BannerBox>
+          <strong>Um Top 10 especial</strong>
+
+          <em>
+            Aqui temos um top 10 de itens especiais escolhidos pela minha
+            companheira. Sendo uma forma de homenagem, para alguém especial em
+            minha trajetória.
+          </em>
+        </BannerBox>
 
         <ProductsContainer>
           {products.map((product) => {

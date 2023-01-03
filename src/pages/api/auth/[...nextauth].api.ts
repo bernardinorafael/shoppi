@@ -12,6 +12,9 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? '',
       authorization: {
         params: {
+          prompt: 'consent',
+          access_type: 'offline',
+          response_type: 'code',
           scope:
             'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile',
         },
@@ -22,7 +25,7 @@ export const authOptions: NextAuthOptions = {
           id: profile.sub,
           name: profile.name,
           email: profile.email,
-          avatar_url: profile.picture,
+          image: profile.picture,
         }
       },
     }),

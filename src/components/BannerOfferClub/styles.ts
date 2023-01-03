@@ -20,6 +20,7 @@ export const BannerContainer = styled.div`
     color: ${({ theme }) => theme.COLORS.primary[1200]};
     font-weight: 700;
     height: 3rem;
+    border-radius: 12px;
     line-height: 0;
     outline: none;
     padding: 1.5rem;

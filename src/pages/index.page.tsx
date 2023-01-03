@@ -77,7 +77,7 @@ export default function Home({
   return (
     <>
       <Head>
-        <title>Shoppi</title>
+        <title>Shoppi | Tênis e material esportivo</title>
       </Head>
 
       <Container>

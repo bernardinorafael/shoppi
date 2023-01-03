@@ -17,7 +17,7 @@ export const DropdownItem = styled(Dropdown.Item)`
   width: 100%;
   align-items: center;
   display: flex;
-  font-weight: 500;
+  font-weight: 600;
   height: 100%;
   gap: 0.5rem;
   padding: 0.225rem 1rem;
@@ -38,7 +38,7 @@ export const DropdownSubTrigger = styled(Dropdown.SubTrigger)`
   width: 100%;
   align-items: center;
   display: flex;
-  font-weight: 500;
+  font-weight: 600;
   height: 100%;
   gap: 0.5rem;
   padding: 0.225rem 1rem;

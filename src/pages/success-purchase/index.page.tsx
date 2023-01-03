@@ -1,14 +1,17 @@
-import { Container } from './styles'
-import Link from 'next/link'
 import { GetServerSideProps } from 'next'
-import { stripe } from '../../services/stripe'
-import { ArrowBendDownLeft } from 'phosphor-react'
+import { unstable_getServerSession } from 'next-auth'
 import Head from 'next/head'
-import { useShoppingCart } from 'use-shopping-cart'
+import Link from 'next/link'
+import { ArrowBendDownLeft } from 'phosphor-react'
 import { useEffect } from 'react'
+import { useShoppingCart } from 'use-shopping-cart'
+import { prisma } from '../../services/prisma'
+import { stripe } from '../../services/stripe'
+import { authOptions } from '../api/auth/[...nextauth].api'
+import { Container } from './styles'
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  if (!query.session_id) {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  if (!ctx.query.session_id) {
     return {
       redirect: {
         destination: '/',
@@ -17,26 +20,36 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     }
   }
 
-  const sessionId = String(query.session_id)
+  const session = await unstable_getServerSession(ctx.req, ctx.res, authOptions)
+  const checkoutId = String(ctx.query.session_id)
 
-  const session = await stripe.checkout.sessions.retrieve(sessionId, {
+  const checkout = await stripe.checkout.sessions.retrieve(checkoutId, {
     expand: ['line_items', 'line_items.data.price.product'],
   })
 
-  const customerName = session.customer_details.name
+  const customer = checkout.customer_details.name
+
+  await prisma.purchase.create({
+    data: {
+      amount_total_checkout: checkout.amount_total,
+      checkout_id: checkoutId,
+      email: checkout.customer_details.email,
+      name: checkout.customer_details.name,
+
+      userId: session.user.id,
+    },
+  })
 
   return {
-    props: { customerName },
+    props: { customer },
   }
 }
 
 type SuccessPurchaseProps = {
-  customerName: string
+  customer: string
 }
 
-export default function SuccessPurchase({
-  customerName,
-}: SuccessPurchaseProps) {
+export default function SuccessPurchase({ customer }: SuccessPurchaseProps) {
   const { clearCart } = useShoppingCart()
 
   useEffect(() => {
@@ -46,17 +59,18 @@ export default function SuccessPurchase({
   return (
     <>
       <Head>
-        <title>{`Parabéns pela sua compra, ${customerName}`}</title>
+        <title>{`Parabéns pela sua compra, ${customer}`}</title>
       </Head>
 
       <Container>
         <h1>Parabéns pela sua compra!! 🛍️</h1>
         <p>
-          Uhuull! <strong>{customerName}</strong>, sua compra já está à caminho!
+          Uhuull! <strong>{customer}</strong>, sua compra já está sendo
+          processada!
         </p>
 
         <Link href="/">
-          Voltar ao catálago!
+          Voltar ao catálogo!
           <ArrowBendDownLeft weight="bold" size="18" />
         </Link>
       </Container>

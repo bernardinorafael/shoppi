@@ -38,6 +38,7 @@ export const ButtonCaretSlide = styled.button`
   outline: none;
   padding: 0.5rem;
   cursor: default;
+	border-radius: 6px;
 
   &:active {
     transform: scale(1.1);
