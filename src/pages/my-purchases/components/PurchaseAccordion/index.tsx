@@ -1,9 +1,9 @@
 import { ReactNode } from 'react'
 import {
+  AccordionContent,
   AccordionItem,
   AccordionRoot,
   AccordionTrigger,
-  AccordionContent,
 } from './styles'
 
 type PurchaseAccordionProps = {
@@ -16,7 +16,7 @@ export default function PurchaseAccordion({
   content,
 }: PurchaseAccordionProps) {
   return (
-    <AccordionRoot type="single" collapsible>
+    <AccordionRoot defaultValue="first" type="single" collapsible>
       <AccordionItem value="first">
         <AccordionTrigger asChild>{children}</AccordionTrigger>
 

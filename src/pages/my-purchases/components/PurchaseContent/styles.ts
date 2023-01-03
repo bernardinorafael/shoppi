@@ -1,27 +1,27 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  width: 100%;
-  height: 100%;
-  padding: 1rem 0 0;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  padding: 1rem 0 0;
+  width: 100%;
 
   > section {
-    padding: 0.5rem;
+    background: ${({ theme }) => theme.COLORS.primary['800']};
+    border-top: 1px solid ${(props) => props.theme.COLORS.primary['500']};
     display: flex;
     gap: 0.5rem;
     justify-content: flex-end;
-    border-top: 1px solid ${(props) => props.theme.COLORS.primary['500']};
-    background: ${({ theme }) => theme.COLORS.primary['800']};
+    padding: 0.5rem;
 
     button {
       background-color: transparent;
-      border: none;
-      outline: none;
-      font-weight: 600;
-      padding: 0.5rem;
       border-radius: 6px;
+      border: none;
+      font-weight: 600;
+      outline: none;
+      padding: 0.5rem;
 
       &:hover {
         background-color: ${(props) => props.theme.COLORS.primary['900']};
@@ -32,56 +32,59 @@ export const Container = styled.div`
 `
 
 export const Product = styled.div`
-  padding: 0.5rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  padding: 0.5rem;
 
   & + & {
     border-top: 1px solid ${(props) => props.theme.COLORS.primary['500']};
   }
 
   section:first-child {
-    width: 100%;
     display: flex;
     gap: 1rem;
+    width: 100%;
+
+    img {
+      border: 1px solid ${({ theme }) => theme.COLORS.primary['500']};
+      border-radius: 8px;
+
+      &:active {
+        transform: scale(1.04);
+      }
+    }
 
     > div {
       display: flex;
       flex-direction: column;
       gap: 0.225rem;
 
+      > div {
+        display: flex;
+        gap: 1rem;
+      }
+
       strong {
         font-size: 1.25rem;
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
 
       span {
         font-size: 0.875rem;
+        font-weight: 600;
 
         > strong {
           font-size: 0.875rem;
         }
       }
     }
-  }
-`
 
-export const ButtonAddToCart = styled.button`
-  margin-left: auto;
-  padding: 0.5rem;
-  line-height: 0;
-  border: none;
-  outline: none;
-  align-self: flex-start;
-  border-radius: 6px;
-
-  &:disabled {
-    opacity: 0.8;
-    cursor: not-allowed;
-  }
-
-  &:not(:disabled):hover {
-    background-color: ${(props) => props.theme.COLORS.primary['900']};
-    transition: background-color 150ms;
+    > div:last-child {
+      margin-left: auto;
+    }
   }
 `

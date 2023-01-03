@@ -46,6 +46,11 @@ export const AccordionTrigger = styled(Trigger)`
     transition: background-color 200ms;
   }
 
+  &[data-state='open'] {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+      rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  }
+
   svg {
     transition: 400ms cubic-bezier(0.87, 0, 0.13, 1);
 

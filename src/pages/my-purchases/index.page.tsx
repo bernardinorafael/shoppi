@@ -1,15 +1,13 @@
-import { format, formatDistanceToNow } from 'date-fns'
-import ptBR from 'date-fns/locale/pt-BR'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import { CaretRight } from 'phosphor-react'
 import HeaderInternalPageNavigation from '../../components/HeaderInternalPageNavigation'
-import Tooltip from '../../primitives/Tooltip'
 import { prisma } from '../../services/prisma'
+import ButtonAccordionBox from './components/ButtonAccordionBox'
 import PurchaseAccordion from './components/PurchaseAccordion'
 import PurchaseContent from './components/PurchaseContent'
-import { ButtonAccordion, Container, ContentBox } from './styles'
+import { Container, ContentBox } from './styles'
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const checkoutsList = await prisma.purchase.findMany({
@@ -44,12 +42,6 @@ type MyPurchasesProps = {
 }
 
 export default function MyPurchases({ checkouts }: MyPurchasesProps) {
-  const currencyFormatted = new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-    minimumFractionDigits: 2,
-  })
-
   return (
     <>
       <Head>
@@ -69,41 +61,20 @@ export default function MyPurchases({ checkouts }: MyPurchasesProps) {
             return (
               <PurchaseAccordion
                 key={checkout.id}
-                content={<PurchaseContent id={checkout.id} />}
+                content={
+                  <PurchaseContent
+                    id={checkout.id}
+                    checkoutId={checkout.checkout_id}
+                  />
+                }
               >
-                <ButtonAccordion>
-                  <Tooltip
-                    render={format(
-                      new Date(checkout.created_at),
-                      "dd 'de' LLLL 'de' yyyy',' 'às' HH:mm",
-                      { locale: ptBR },
-                    )}
-                  >
-                    <div>
-                      <strong>Data do pedido:</strong>
-                      <span>
-                        {formatDistanceToNow(new Date(checkout.created_at), {
-                          addSuffix: true,
-                          locale: ptBR,
-                        })}
-                      </span>
-                    </div>
-                  </Tooltip>
-
-                  <div>
-                    <strong>Total:</strong>
-                    <span>
-                      {currencyFormatted.format(checkout.amount_total_checkout)}
-                    </span>
-                  </div>
-
-                  <div>
-                    <strong>Cliente:</strong>
-                    <strong>{checkout.name}</strong>
-                  </div>
-
-                  <CaretRight weight="bold" size={22} />
-                </ButtonAccordion>
+                <button>
+                  <ButtonAccordionBox
+                    amount_total_checkout={checkout.amount_total_checkout}
+                    created_at={checkout.created_at}
+                    name={checkout.name}
+                  />
+                </button>
               </PurchaseAccordion>
             )
           })}

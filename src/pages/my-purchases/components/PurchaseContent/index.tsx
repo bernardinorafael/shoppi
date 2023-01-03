@@ -1,99 +1,107 @@
-import { ButtonAddToCart, Container, Product } from './styles'
-import Image from 'next/image'
-import { ShoppingCartSimple } from 'phosphor-react'
-import Tooltip from '../../../../primitives/Tooltip'
-import AlertDialog from '../../../../primitives/AlertDialog'
 import axios from 'axios'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import AlertDialog from '../../../../primitives/AlertDialog'
+import { Container, Product } from './styles'
+import SkeletonLoader from '../../../../components/Skeleton'
 
 type PurchaseContentProps = {
   id: string
+  checkoutId: string
 }
 
-export default function PurchaseContent({ id }: PurchaseContentProps) {
+type Products = {
+  id: string
+  amountTotal: number
+  description: string
+  quantity: number
+  unitAmount: number
+  productId: string
+  priceId: string
+  size?: string
+  imageUrl: string
+}
+
+export default function PurchaseContent(props: PurchaseContentProps) {
+  const [products, setProducts] = useState<Products[]>([])
+  const [isFetchingProducts, setIsFetchingProducts] = useState(false)
+
   async function handleDeleteCheckout(checkoutId: string) {
     await axios.post('/api/purchases/delete-purchase', { checkoutId })
     window.location.reload()
   }
 
+  useEffect(() => {
+    async function fetchProducts() {
+      try {
+        setIsFetchingProducts(true)
+
+        const response = await axios.post('/api/purchases/list-products', {
+          checkoutId: props.checkoutId,
+        })
+
+        setIsFetchingProducts(false)
+        setProducts(response.data.products)
+      } catch (err) {
+        setIsFetchingProducts(false)
+
+        console.error(err)
+      }
+    }
+
+    fetchProducts()
+  }, [props.checkoutId])
+
+  const currencyFormatted = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+    maximumFractionDigits: 2,
+  })
+
   return (
     <Container>
-      <Product>
-        <section>
-          <Image
-            src="/prod_N0so2qrWSBThVj-a.webp"
-            width={60}
-            height={60}
-            alt=""
-          />
+      {products.map((product) => {
+        return (
+          <Product key={product.id}>
+            {isFetchingProducts ? (
+              <SkeletonLoader />
+            ) : (
+              <section>
+                <Link href={`/product/${product.productId}`}>
+                  <Image src={product.imageUrl} width={40} height={40} alt="" />
+                </Link>
+                <div>
+                  <Link href={`/product/${product.productId}`}>
+                    <strong>{product.description}</strong>
+                  </Link>
 
-          <div>
-            <strong>Converse All Star Run Star Motion Canvas</strong>
-            <div>
-              <span>
-                R$ 699,99 / <strong>1 un</strong>
-              </span>
-            </div>
-          </div>
+                  <div>
+                    <span>
+                      {currencyFormatted.format(product.unitAmount / 100)}/un
+                    </span>
+                  </div>
+                </div>
 
-          <Tooltip align="center" sideOffset={5} render="Adicionar no carrinho">
-            <ButtonAddToCart>
-              <ShoppingCartSimple size={22} />
-            </ButtonAddToCart>
-          </Tooltip>
-        </section>
-      </Product>
-      <Product>
-        <section>
-          <Image
-            src="/prod_N0so2qrWSBThVj-a.webp"
-            width={60}
-            height={60}
-            alt=""
-          />
-
-          <div>
-            <strong>Converse All Star Run Star Motion Canvas</strong>
-            <span>R$ 699,99/un</span>
-          </div>
-
-          <Tooltip align="center" sideOffset={5} render="Adicionar no carrinho">
-            <ButtonAddToCart>
-              <ShoppingCartSimple size={22} />
-            </ButtonAddToCart>
-          </Tooltip>
-        </section>
-      </Product>
-      <Product>
-        <section>
-          <Image
-            src="/prod_N0so2qrWSBThVj-a.webp"
-            width={60}
-            height={60}
-            alt=""
-          />
-
-          <div>
-            <strong>Converse All Star Run Star Motion Canvas</strong>
-            <span>R$ 699,99/un</span>
-          </div>
-
-          <Tooltip align="center" sideOffset={5} render="Adicionar no carrinho">
-            <ButtonAddToCart>
-              <ShoppingCartSimple size={22} />
-            </ButtonAddToCart>
-          </Tooltip>
-        </section>
-      </Product>
+                <div>
+                  <span>
+                    Qtd: {product.quantity} /{' '}
+                    {currencyFormatted.format(product.amountTotal / 100)}
+                  </span>
+                </div>
+              </section>
+            )}
+          </Product>
+        )
+      })}
 
       <section>
-        <button>Ver mais detalhes</button>
-
         <AlertDialog
           action="Excluir pedido"
           cancel="Cancelar"
-          title="Você deseja excluir este pedido?"
           description="Essa ação não pode ser desfeita."
-          execute={() => handleDeleteCheckout(id)}
+          execute={() => handleDeleteCheckout(props.id)}
+          title="Você deseja excluir este pedido?"
         >
           <button>Excluir pedido</button>
         </AlertDialog>

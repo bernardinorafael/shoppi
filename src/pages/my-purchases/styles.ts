@@ -19,34 +19,3 @@ export const ContentBox = styled.div`
   flex-direction: column;
   gap: 1rem;
 `
-
-export const ButtonAccordion = styled.button`
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-
-  svg {
-    justify-self: flex-end;
-  }
-
-  > div {
-    display: flex;
-    flex-direction: column;
-    gap: 0.225rem;
-    text-align: left;
-
-    strong {
-      text-transform: uppercase;
-
-      &:last-child {
-        text-transform: capitalize;
-        font-weight: 500;
-      }
-    }
-
-    span {
-      font-size: 0.775rem;
-      font-weight: 500;
-    }
-  }
-`
