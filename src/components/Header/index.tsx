@@ -23,10 +23,6 @@ export default function Header() {
   const isButtonCartDisable = cartCount <= 0
   const isUserAuthenticated = status === 'authenticated'
 
-  // const name = session.user.name
-
-  console.log(name)
-
   return (
     <Container>
       <section>
